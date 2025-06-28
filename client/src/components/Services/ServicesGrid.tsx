@@ -12,6 +12,7 @@ import {
 
 const services = [
   {
+    id: 'conversational-ai',
     icon: Bot,
     title: 'Conversational AI',
     description: 'Build intelligent chatbots, voicebots, and WhatsApp bots that understand context and deliver personalized customer experiences.',
@@ -20,6 +21,7 @@ const services = [
     hoverGradient: 'hover:from-purple-600 hover:to-purple-700',
   },
   {
+    id: 'agentic-ai',
     icon: Cog,
     title: 'Agentic AI Solutions',
     description: 'Enable dynamic AI-driven workflows that adapt and respond to changing business needs with autonomous decision-making capabilities.',
@@ -28,6 +30,7 @@ const services = [
     hoverGradient: 'hover:from-blue-600 hover:to-blue-700',
   },
   {
+    id: 'call-centre',
     icon: Headphones,
     title: 'Call Centre Solutions',
     description: 'Enhance call center efficiency with AI-powered agent auditing, real-time analytics, and intelligent customer insights.',
@@ -36,6 +39,7 @@ const services = [
     hoverGradient: 'hover:from-green-600 hover:to-green-700',
   },
   {
+    id: 'devops-cicd',
     icon: GitBranch,
     title: 'DevOps & CI/CD',
     description: 'Streamline software delivery with end-to-end DevOps pipelines, automated testing, and built-in observability tools.',
@@ -44,6 +48,7 @@ const services = [
     hoverGradient: 'hover:from-orange-600 hover:to-orange-700',
   },
   {
+    id: 'mlops-platform',
     icon: Brain,
     title: 'MLOps Platform',
     description: 'Accelerate AI development with custom model training, automated data annotation, and streamlined ML operations.',
@@ -52,6 +57,7 @@ const services = [
     hoverGradient: 'hover:from-pink-600 hover:to-pink-700',
   },
   {
+    id: 'gpu-optimization',
     icon: Cpu,
     title: 'GPU & Infra Optimization',
     description: 'Optimize compute costs with intelligent GPU slicing, infrastructure tuning, and hybrid cloud management solutions.',
@@ -75,7 +81,7 @@ export function ServicesGrid() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => (
-            <Card key={service.title} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-shadow">
+            <Card id={service.id} key={service.title} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-shadow">
               <CardHeader>
                 <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center mb-6`}>
                   <service.icon className="h-8 w-8 text-white" />
@@ -96,6 +102,14 @@ export function ServicesGrid() {
                 </ul>
                 <Button 
                   className={`w-full bg-gradient-to-r ${service.gradient} text-white ${service.hoverGradient} transition-all`}
+                  onClick={() => {
+                    if (service.id) {
+                      const element = document.getElementById(service.id);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }
+                  }}
                 >
                   Learn More
                 </Button>

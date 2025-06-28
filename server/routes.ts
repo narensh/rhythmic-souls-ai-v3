@@ -35,6 +35,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const results = await searchWithOpenAI(query);
+      
+      // Track search analytics for authenticated users
+      const userId = (req as any).user?.claims?.sub;
+      if (userId) {
+        try {
+          await storage.trackUserAnalytics({
+            userId,
+            sessionId: req.sessionID || `session_${userId}_${Date.now()}`,
+            ipAddress: req.ip || '',
+            userAgent: req.get('User-Agent') || '',
+            location: { country: 'Unknown', city: 'Unknown' },
+            browserInfo: {},
+            pageViews: [],
+            searchQueries: [query],
+            actionsPerformed: [{ type: 'search', query, timestamp: new Date() }],
+            sessionDuration: 0
+          });
+        } catch (analyticsError) {
+          console.error("Analytics tracking error:", analyticsError);
+          // Continue with search even if analytics fails
+        }
+      }
+      
       res.json({ results });
     } catch (error) {
       console.error("Search error:", error);
@@ -61,23 +84,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const analytics = await storage.getUserAnalytics(userId);
       const projects = await storage.getUserProjects(userId);
       
-      // Calculate dashboard stats
-      const totalApiCalls = analytics.reduce((sum, a) => sum + (a.actionsPerformed?.length || 0), 0);
-      const totalSessions = analytics.length;
+      // Filter analytics for current user
+      const userAnalytics = analytics.filter(a => a.userId === userId);
+      
+      // Calculate dashboard stats  
+      const totalSearchQueries = userAnalytics.reduce((sum, a) => sum + (a.searchQueries?.length || 0), 0);
+      const totalSessions = new Set(userAnalytics.map(a => a.sessionId).filter(Boolean)).size;
       const totalProjects = projects.length;
       
       res.json({
         stats: {
-          apiCalls: totalApiCalls,
+          apiCalls: totalSearchQueries,
           sessions: totalSessions,
           projects: totalProjects,
-          storage: "2.4GB" // Mock storage for now
+          storage: "2.4GB"
         },
-        recentActivity: analytics.slice(0, 10).map(a => ({
-          type: 'activity',
-          description: `Session from ${(a.location as any)?.country || 'Unknown location'}`,
-          timestamp: a.createdAt
-        }))
+        recentActivity: userAnalytics.slice(0, 10).map(a => {
+          let description = '';
+          if (a.searchQueries && a.searchQueries.length > 0) {
+            description = `Search: "${a.searchQueries[0]?.substring(0, 30)}..."`;
+          } else if (a.pageViews && Array.isArray(a.pageViews) && a.pageViews.length > 0) {
+            const lastPageView = a.pageViews[a.pageViews.length - 1] as any;
+            description = `Visited ${lastPageView?.path || 'page'}`;
+          } else {
+            description = 'Session activity';
+          }
+          
+          return {
+            type: 'activity',
+            description,
+            timestamp: a.createdAt
+          };
+        })
       });
     } catch (error) {
       console.error("Error fetching dashboard:", error);

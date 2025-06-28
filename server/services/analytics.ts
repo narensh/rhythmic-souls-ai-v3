@@ -26,9 +26,14 @@ export async function trackAnalytics(req: AnalyticsRequest, res: Response, next:
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
     };
 
+    // Only track analytics for authenticated users
+    if (!userId) {
+      return next();
+    }
+
     const analyticsData = {
       userId,
-      sessionId: req.sessionID || 'anonymous',
+      sessionId: req.sessionID || `session_${userId}_${Date.now()}`,
       ipAddress,
       userAgent,
       location,

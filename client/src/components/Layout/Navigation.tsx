@@ -6,6 +6,7 @@ import { SearchBar } from '@/components/Search/SearchBar';
 import { Moon, Sun, User, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import logoPath from '@assets/logo-design_1751134726547.jpg';
 
 export function Navigation() {
   const { theme, toggleTheme } = useTheme();
@@ -20,7 +21,7 @@ export function Navigation() {
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3">
               <img 
-                src="/attached_assets/logo-design_1751134726547.jpg" 
+                src={logoPath} 
                 alt="Rhythmic Souls AI Logo" 
                 className="w-10 h-10 rounded-full object-cover"
               />

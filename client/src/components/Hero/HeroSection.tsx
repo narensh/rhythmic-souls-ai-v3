@@ -18,10 +18,10 @@ export function HeroSection() {
               Accelerate growth with our comprehensive AI solutions - from conversational bots to MLOps platforms. 
               Build, deploy, and scale intelligent systems that drive real business value.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 w-full max-w-lg">
               <Button 
                 size="lg"
-                className="px-8 py-4 bg-white text-purple-600 font-semibold hover:bg-purple-50 transition-colors"
+                className="flex-1 sm:flex-none px-6 py-3 bg-white text-purple-600 font-semibold hover:bg-purple-50 transition-colors text-center"
                 onClick={() => window.location.href = '/api/login'}
               >
                 Start Free Trial
@@ -29,7 +29,14 @@ export function HeroSection() {
               <Button 
                 size="lg"
                 variant="outline"
-                className="px-8 py-4 border-2 border-white text-white font-semibold hover:bg-white hover:text-purple-600 transition-colors"
+                className="flex-1 sm:flex-none px-6 py-3 border-2 border-white text-white font-semibold hover:bg-white hover:text-purple-600 transition-colors text-center"
+                onClick={() => {
+                  // Scroll to contact section or open contact modal
+                  const contactElement = document.querySelector('#contact') || document.querySelector('footer');
+                  if (contactElement) {
+                    contactElement.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
               >
                 Schedule Demo
               </Button>

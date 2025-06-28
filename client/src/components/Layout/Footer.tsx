@@ -1,5 +1,6 @@
 import { Link } from 'wouter';
 import { Mail, Phone } from 'lucide-react';
+import logoPath from '@assets/logo-design_1751134726547.jpg';
 
 const services = [
   'Conversational AI',
@@ -30,14 +31,14 @@ const company = [
 
 export function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-300 py-16">
+    <footer id="contact" className="bg-slate-900 text-slate-300 py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-3 mb-6">
               <img 
-                src="/attached_assets/logo-design_1751134726547.jpg" 
+                src={logoPath} 
                 alt="Rhythmic Souls AI Logo" 
                 className="w-10 h-10 rounded-full object-cover"
               />

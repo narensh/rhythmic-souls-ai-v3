@@ -79,18 +79,23 @@ export function Sidebar() {
 
   return (
     <aside className={`fixed left-0 top-16 bottom-0 ${isCollapsed ? 'w-16' : 'w-64'} bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 transform -translate-x-full lg:translate-x-0 transition-all duration-300 z-40 overflow-y-auto`}>
-      {/* Collapse/Expand Button */}
-      <div className="absolute -right-3 top-4 z-10">
+      {/* Hamburger Menu Button */}
+      <div className="flex justify-between items-center p-4 border-b border-slate-200 dark:border-slate-700">
+        {!isCollapsed && (
+          <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+            Navigation
+          </h2>
+        )}
         <Button
-          variant="outline"
+          variant="ghost"
           size="sm"
-          className="h-6 w-6 p-0 rounded-full bg-white dark:bg-slate-900 border shadow-md"
+          className="h-8 w-8 p-0 hover:bg-slate-100 dark:hover:bg-slate-800"
           onClick={toggleSidebar}
         >
           {isCollapsed ? (
-            <ChevronRight className="h-3 w-3" />
+            <ChevronRight className="h-4 w-4" />
           ) : (
-            <ChevronLeft className="h-3 w-3" />
+            <ChevronLeft className="h-4 w-4" />
           )}
         </Button>
       </div>

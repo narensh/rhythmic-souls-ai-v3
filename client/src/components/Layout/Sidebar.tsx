@@ -20,12 +20,12 @@ import {
 import { Button } from '@/components/ui/button';
 
 const mainServices = [
-  { href: '/services#conversational-ai', icon: Bot, label: 'Conversational AI', color: 'text-purple-500' },
-  { href: '/services#agentic-ai', icon: Cog, label: 'Agentic AI Solutions', color: 'text-blue-500' },
-  { href: '/services#call-center', icon: Headphones, label: 'Call Centre Solutions', color: 'text-green-500' },
-  { href: '/services#devops', icon: GitBranch, label: 'DevOps & CI/CD', color: 'text-orange-500' },
-  { href: '/services#mlops', icon: Brain, label: 'MLOps Platform', color: 'text-pink-500' },
-  { href: '/services#gpu-optimization', icon: Cpu, label: 'GPU Optimization', color: 'text-red-500' },
+  { href: 'services', icon: Bot, label: 'Conversational AI', color: 'text-purple-500' },
+  { href: 'services', icon: Cog, label: 'Agentic AI Solutions', color: 'text-blue-500' },
+  { href: 'services', icon: Headphones, label: 'Call Centre Solutions', color: 'text-green-500' },
+  { href: 'services', icon: GitBranch, label: 'DevOps & CI/CD', color: 'text-orange-500' },
+  { href: 'services', icon: Brain, label: 'MLOps Platform', color: 'text-pink-500' },
+  { href: 'services', icon: Cpu, label: 'GPU Optimization', color: 'text-red-500' },
 ];
 
 const additionalTools = [
@@ -39,17 +39,22 @@ const additionalTools = [
 export function Sidebar() {
   const { isCollapsed, toggleSidebar } = useSidebar();
 
-  const handleServiceClick = (href: string) => {
-    if (href.startsWith('/services#')) {
-      const sectionId = href.split('#')[1];
-      // Navigate to services page first, then scroll to section
-      window.location.href = '/services';
+  const handleServiceClick = (sectionId: string) => {
+    // First navigate to home page if not already there
+    if (window.location.pathname !== '/') {
+      window.location.href = '/';
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+    } else {
+      // Already on home page, just scroll to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 

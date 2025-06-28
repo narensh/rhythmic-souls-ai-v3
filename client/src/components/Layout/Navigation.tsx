@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useAuth } from '@/hooks/useAuth';
+import { useSidebar } from '@/contexts/SidebarContext';
 import { SearchBar } from '@/components/Search/SearchBar';
 import { Moon, Sun, User, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,6 +11,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 export function Navigation() {
   const { theme, toggleTheme } = useTheme();
   const { user, isAuthenticated } = useAuth();
+  const { toggleSidebar } = useSidebar();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -17,20 +19,33 @@ export function Navigation() {
       <nav className="fixed top-0 left-0 right-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <Link href="/" className="flex items-center space-x-3">
-              <img 
-                src="/logo.jpg" 
-                alt="Rhythmic Souls AI Logo" 
-                className="w-10 h-10 rounded-full object-cover"
-              />
-              <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
-                  Rhythmic Souls AI
-                </h1>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Intelligent Business Solutions</p>
-              </div>
-            </Link>
+            <div className="flex items-center space-x-3">
+              {/* Hamburger Menu Button */}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-10 w-10 p-0 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
+                onClick={toggleSidebar}
+                title="Main menu"
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+              
+              {/* Logo */}
+              <Link href="/" className="flex items-center space-x-3">
+                <img 
+                  src="/logo.jpg" 
+                  alt="Rhythmic Souls AI Logo" 
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+                <div>
+                  <h1 className="text-xl font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+                    Rhythmic Souls AI
+                  </h1>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Intelligent Business Solutions</p>
+                </div>
+              </Link>
+            </div>
 
             {/* Navigation Items */}
             <div className="hidden md:flex items-center space-x-8">

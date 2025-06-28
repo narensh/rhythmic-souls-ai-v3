@@ -78,19 +78,6 @@ export function Sidebar() {
 
   return (
     <aside className={`fixed left-0 top-16 bottom-0 ${isCollapsed ? 'w-16' : 'w-64'} bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 transform -translate-x-full lg:translate-x-0 transition-all duration-300 z-40 overflow-y-auto`}>
-      {/* Hamburger Menu Button */}
-      <div className="flex justify-center items-center p-4 border-b border-slate-200 dark:border-slate-700">
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-8 w-8 p-0 hover:bg-slate-100 dark:hover:bg-slate-800"
-          onClick={toggleSidebar}
-          title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          <Menu className="h-4 w-4" />
-        </Button>
-      </div>
-
       <div className="p-4">
         {!isCollapsed && (
           <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">

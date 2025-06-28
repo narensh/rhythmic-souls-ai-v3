@@ -112,7 +112,7 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-slate-400">
-            © 2024 Rhythmic Souls Pvt Ltd. All rights reserved.
+            © 2025 Rhythmic Souls Pvt Ltd. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-slate-400 hover:text-purple-400 transition-colors">

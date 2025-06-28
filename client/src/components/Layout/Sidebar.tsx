@@ -29,11 +29,11 @@ const mainServices = [
 ];
 
 const additionalTools = [
-  { href: '#content-creation', icon: Edit, label: 'Content Creation', color: 'text-purple-400' },
-  { href: '#news-feed', icon: Newspaper, label: 'Latest News', color: 'text-blue-400' },
-  { href: '#music-tools', icon: Music, label: 'Music Tools', color: 'text-green-400' },
-  { href: '#education', icon: GraduationCap, label: 'Education Platform', color: 'text-yellow-400' },
-  { href: '#resources', icon: Book, label: 'Resources Library', color: 'text-indigo-400' },
+  { href: 'content-creation', icon: Edit, label: 'Content Creation', color: 'text-purple-400' },
+  { href: 'news-feed', icon: Newspaper, label: 'Latest News', color: 'text-blue-400' },
+  { href: 'music-tools', icon: Music, label: 'Music Tools', color: 'text-green-400' },
+  { href: 'education', icon: GraduationCap, label: 'Education Platform', color: 'text-yellow-400' },
+  { href: 'resources', icon: Book, label: 'Resources Library', color: 'text-indigo-400' },
 ];
 
 export function Sidebar() {
@@ -50,6 +50,25 @@ export function Sidebar() {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+    }
+  };
+
+  const handleToolClick = (sectionId: string) => {
+    // First navigate to home page if not already there
+    if (window.location.pathname !== '/') {
+      window.location.href = '/';
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -100,15 +119,15 @@ export function Sidebar() {
         )}
         <nav className="space-y-2">
           {additionalTools.map((tool) => (
-            <Link
+            <button
               key={tool.href}
-              href={tool.href}
-              className={`flex items-center ${isCollapsed ? 'justify-center' : 'space-x-3'} p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group`}
+              onClick={() => handleToolClick(tool.href)}
+              className={`flex items-center ${isCollapsed ? 'justify-center' : 'space-x-3'} p-3 w-full rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group`}
               title={isCollapsed ? tool.label : ''}
             >
               <tool.icon className={`h-5 w-5 ${tool.color}`} />
               {!isCollapsed && <span className="text-sm font-medium">{tool.label}</span>}
-            </Link>
+            </button>
           ))}
         </nav>
 

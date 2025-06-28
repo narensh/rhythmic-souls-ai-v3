@@ -24,12 +24,22 @@ export default function Home() {
         <HeroSection />
         <UserDashboard />
         <ServicesGrid />
-        <InteractiveDemo />
-        <CodeEditor />
-        <MusicTools />
-        <NewsSection />
+        <div id="content-creation">
+          <InteractiveDemo />
+        </div>
+        <div id="education">
+          <CodeEditor />
+        </div>
+        <div id="music-tools">
+          <MusicTools />
+        </div>
+        <div id="news-feed">
+          <NewsSection />
+        </div>
         <TestimonialsSection />
-        <NewsletterSection />
+        <div id="resources">
+          <NewsletterSection />
+        </div>
       </main>
       
       <Footer />

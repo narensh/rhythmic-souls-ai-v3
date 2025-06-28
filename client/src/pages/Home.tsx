@@ -10,14 +10,17 @@ import { TestimonialsSection } from '@/components/Testimonials/TestimonialsSecti
 import { NewsletterSection } from '@/components/Newsletter/NewsletterSection';
 import { Footer } from '@/components/Layout/Footer';
 import { Sidebar } from '@/components/Layout/Sidebar';
+import { useSidebar } from '@/contexts/SidebarContext';
 
 export default function Home() {
+  const { isCollapsed } = useSidebar();
+  
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Navigation />
       <Sidebar />
       
-      <main className="lg:ml-64 pt-16 min-h-screen">
+      <main className={`lg:${isCollapsed ? 'ml-16' : 'ml-64'} pt-16 min-h-screen transition-all duration-300`}>
         <HeroSection />
         <UserDashboard />
         <ServicesGrid />

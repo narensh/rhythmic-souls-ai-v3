@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, Globe } from 'lucide-react';
 
 const services = [
   'Conversational AI',
@@ -50,6 +50,10 @@ export function Footer() {
               we deliver cutting-edge technology that drives real results.
             </p>
             <div className="space-y-2">
+              <div className="flex items-center space-x-3">
+                <Globe className="h-4 w-4 text-purple-400" />
+                <span className="text-sm">www.rhythmicsouls.ai</span>
+              </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-purple-400" />
                 <span className="text-sm">info@rhythmicsouls.ai</span>

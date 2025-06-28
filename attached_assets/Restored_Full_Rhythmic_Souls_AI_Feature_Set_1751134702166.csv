@@ -1,0 +1,33 @@
+Feature Title,Feature Description,Needs Database,Content/API Source,Integration Source/API,Steps to Find & Use Integration
+Hero Banner / Featured Slider,Visually engaging banner showcasing company offerings,No,Static JSON or CMS,-,-
+Navigation & Mega Menu,Sticky menu with smooth scroll and dropdowns,No,Manual configuration,-,-
+Latest News Feed,Chronological list of latest posts or announcements,Yes,"Medium RSS, Ghost CMS, Contentful","rss2json, Contentful API",Use RSS + rss2json or CMS API
+Reviews Section,Client or user reviews with badges,Yes,"Airtable, Notion","Airtable API, Notion API",Define table → Fetch via API
+Trailers & Videos,Media section for latest videos,No,"YouTube, Vimeo",Embed iframe,Get embed code from video platform
+Podcasts & Shows,List of episodic content for engagement,No,"Spotify, SoundCloud",Embed iframe,Use embed widget provided
+Guides & How‑Tos,Articles and walkthroughs for user support,Yes,"Contentful, GitHub markdown",CMS API or load markdown,Fetch via token or repo links
+Trending / Most Read,Display of most popular items,Yes,"CMS views, Firebase tracking",Firebase SDK or CMS filter,Use analytics data
+Editor’s Picks / Featured Columns,Manually featured highlights,No,Flagged via CMS,-,Add featured flag to entry
+Newsletter / Subscription Prompt,User email collection form,Yes,"Mailchimp, ConvertKit",Mailchimp/ConvertKit API,"Create form, POST to API"
+Educational Interpreter Platform,Live code editor for Python/JS,No,"Replit Embed, JDoodle, Skulpt","Replit Embed, JDoodle",Use embed=true in iframe
+Sign-Up Page,User onboarding/authentication,Yes,"Firebase Auth, Supabase",Firebase/Supabase,Setup provider and form
+Interactive Demo Video Scenarios,Video walkthrough with branching logic,Yes,Vimeo/YouTube,"Video.js, AWS link",Use conditional branching UI
+Demo Video Playback for Voicebot,Authenticated video preview,Yes,"Vimeo private, AWS",Secure embed with auth,Enable post-login access
+Confluences and Policy Center,"Internal practices, policies, and compliance",No,"Markdown, Notion","Markdown, Notion API",Render markdown or fetch blocks
+Who We Are & Our Vision,Company background and values,No,Static JSON or CMS,-,Static HTML section
+Resources Library,Knowledge base with articles/blogs,Yes,"Medium RSS, Dev.to API, Notion","rss2json, Dev.to, Notion API",Use appropriate API or RSS feed
+Careers Section,Internship and job opportunities,Yes,"Airtable, Google Forms","Airtable API, Forms link",Post to endpoint or send mail
+Domain Experience & Use-Case Impact,Case studies and real-world applications,No,"Manual JSON, Airtable",Static list or Airtable fetch,Cards UI or timeline view
+Testimonials Section,User/client feedback,No,"Airtable, Notion","Airtable API, Notion API",Rotate fetched content
+Music Tools for Creators,Browser-based audio tools,No,"Tone.js, Magenta.js, DAW links",Embed script or iframe,Use open-source JS libraries
+Footer with Legal & Navigation Links,Global site footer,No,Static HTML/CMS block,-,Basic HTML/JSX structure
+Responsive Design,Adaptive layout for all devices,No,"Tailwind CSS, media queries",-,Ensure CSS breakpoints
+Sticky Navigation with Section Scrolling,Persistent top nav with smooth jump,No,Anchor tags + CSS sticky,-,Use scroll-behavior CSS
+Platform Engine Overview,Diagram or explanation of system architecture,No,Static SVG or CMS content,-,Static content or infographic
+AI Copilots Embedded in Workflow,In-app support from embedded AI modules,Yes,Internal API or scripts,-,Simulated responses or demos
+Feature Tables / Comparison,Tabular breakdown vs. competitors,No,Static or CMS-generated table,-,Grid/table UI with icons
+Referral Program,Invite-based user expansion,Yes,CMS + DB logic,-,Form to submit referrals + backend logic
+Leadership Team Profiles,Bios and photos of company leads,No,Static JSON or CMS,-,List-style or grid-style layout
+Event/Blog/Resource Center,Combined hub for media and events,Yes,CMS like Contentful,Contentful API,Category filters with blog/event render
+Merchandise / Shop Integration,Promotional or merch section,Yes,"Printful, Shopify","Shopify API, Printful Widget",Embed or link shop page
+Upcoming Game Release Calendar,Repurpose for feature rollout timeline,No,Manual input or CMS,-,Timeline component

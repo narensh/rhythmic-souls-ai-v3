@@ -28,8 +28,8 @@ export function HeroSection() {
               </Button>
               <Button 
                 size="lg"
-                variant="outline"
-                className="flex-1 sm:flex-none px-6 py-3 border-2 border-white text-white font-semibold hover:bg-white hover:text-purple-600 transition-colors text-center"
+                variant="secondary"
+                className="flex-1 sm:flex-none px-6 py-3 font-semibold transition-colors text-center bg-white text-purple-600 border-2 border-white hover:bg-purple-50 hover:border-purple-200"
                 onClick={() => {
                   // Scroll to contact section or open contact modal
                   const contactElement = document.querySelector('#contact') || document.querySelector('footer');

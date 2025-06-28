@@ -17,7 +17,7 @@ export function Navigation() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 z-50">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-xl mx-auto">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               {/* Hamburger Menu Button - perfectly aligned with sidebar */}

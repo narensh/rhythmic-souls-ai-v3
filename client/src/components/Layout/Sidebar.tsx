@@ -92,7 +92,7 @@ export function Sidebar() {
               className={`flex items-center ${isCollapsed ? 'justify-center' : 'space-x-3'} p-3 w-full rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group`}
               title={isCollapsed ? service.label : ''}
             >
-              <service.icon className={`h-5 w-5 ${service.color}`} />
+              <service.icon className={`${isCollapsed ? 'h-6 w-6' : 'h-5 w-5'} ${service.color}`} />
               {!isCollapsed && <span className="text-sm font-medium">{service.label}</span>}
             </button>
           ))}
@@ -113,7 +113,7 @@ export function Sidebar() {
               className={`flex items-center ${isCollapsed ? 'justify-center' : 'space-x-3'} p-3 w-full rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group`}
               title={isCollapsed ? tool.label : ''}
             >
-              <tool.icon className={`h-5 w-5 ${tool.color}`} />
+              <tool.icon className={`${isCollapsed ? 'h-6 w-6' : 'h-5 w-5'} ${tool.color}`} />
               {!isCollapsed && <span className="text-sm font-medium">{tool.label}</span>}
             </button>
           ))}

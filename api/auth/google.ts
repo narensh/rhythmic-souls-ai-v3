@@ -26,7 +26,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       
       if (!code) {
         // Redirect to Google OAuth
-        const redirectUri = `${req.headers.origin || process.env.VERCEL_URL || 'http://localhost:5000'}/api/auth/google`;
+        const redirectUri = 'http://localhost:5000/api/auth/google';
         const scope = 'openid email profile';
         const responseType = 'code';
         
@@ -41,7 +41,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
       
       // Exchange code for tokens
-      const redirectUri = `${req.headers.origin || process.env.VERCEL_URL || 'http://localhost:5000'}/api/auth/google`;
+      const redirectUri = 'http://localhost:5000/api/auth/google';
       
       const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
         method: 'POST',

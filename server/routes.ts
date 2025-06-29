@@ -149,6 +149,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Navigation options preview
+  app.get("/navigation-options", (req, res) => {
+    res.sendFile("navigation-options.html", { root: "." });
+  });
+
   // Newsletter subscription
   app.post('/api/newsletter/subscribe', async (req, res) => {
     try {

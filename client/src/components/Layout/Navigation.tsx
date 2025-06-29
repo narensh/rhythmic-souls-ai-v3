@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/useAuth";
 import { useSidebar } from "@/contexts/SidebarContext";
@@ -13,6 +13,7 @@ export function Navigation() {
   const { theme, toggleTheme } = useTheme();
   const { user, isAuthenticated } = useAuth();
   const { toggleSidebar } = useSidebar();
+  const [, setLocation] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -138,7 +139,7 @@ export function Navigation() {
                 </div>
               ) : (
                 <Button
-                  onClick={() => (window.location.href = "/api/login")}
+                  onClick={() => setLocation("/auth")}
                   className="bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:from-purple-600 hover:to-blue-600 transition-all"
                 >
                   <User className="h-4 w-4 mr-2" />

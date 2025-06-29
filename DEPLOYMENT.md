@@ -29,13 +29,18 @@ git push origin main
 **For Basic Deployment (Current Setup):**
 No environment variables are required for the basic deployment. The app will work with mock data.
 
-**Note:** Authentication is simplified for Vercel deployment. Login functionality will redirect to the home page with a placeholder message. The main site features (search, content viewing, demos) work without authentication.
+**Authentication System:** Full email/password authentication implemented with:
+- Email/password registration and login forms
+- Session-based authentication with HTTP-only cookies  
+- Google OAuth placeholder (requires additional setup)
+- Proper user management and session handling
 
-**Latest Fix (Applied):** Created individual API route files for Vercel serverless functions:
-- `/api/login.ts` - Handles login requests  
-- `/api/logout.ts` - Handles logout requests
-- `/api/callback.ts` - Handles auth callbacks
-- `/api/auth/user.ts` - Returns user authentication status
+**API Routes (Vercel Compatible):**
+- `/api/auth/login` - Email/password login
+- `/api/auth/register` - User registration  
+- `/api/auth/user` - Get current user session
+- `/api/auth/google` - Google OAuth (placeholder)
+- `/api/logout` - Clear session and logout
 - `/api/news.ts` - Serves news articles
 - `/api/testimonials.ts` - Serves customer testimonials
 - `/api/dashboard.ts` - Serves dashboard data

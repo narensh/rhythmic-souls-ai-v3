@@ -197,7 +197,7 @@ export function Navigation() {
                   About
                 </a>
               </nav>
-              <div className="mt-6 lg:hidden">
+              <div className="mt-6 px-3 lg:hidden">
                 <SearchBar />
               </div>
             </div>

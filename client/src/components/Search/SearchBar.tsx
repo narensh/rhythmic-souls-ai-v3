@@ -33,22 +33,29 @@ const siteContent = {
 };
 
 function searchSiteContent(query: string) {
-  const searchTerm = query.toLowerCase();
+  const searchTerm = query.toLowerCase().trim();
   const results: any[] = [];
+  
+  console.log('Searching for:', searchTerm);
+  console.log('Site content:', siteContent);
   
   // Search through all content categories
   Object.entries(siteContent).forEach(([category, items]) => {
     items.forEach(item => {
-      if (item.title.toLowerCase().includes(searchTerm) || 
-          item.description.toLowerCase().includes(searchTerm)) {
+      const titleMatch = item.title.toLowerCase().includes(searchTerm);
+      const descMatch = item.description.toLowerCase().includes(searchTerm);
+      
+      if (titleMatch || descMatch) {
         results.push({
           ...item,
           category: category.charAt(0).toUpperCase() + category.slice(1),
-          relevance: item.title.toLowerCase().includes(searchTerm) ? 2 : 1
+          relevance: titleMatch ? 2 : 1
         });
       }
     });
   });
+  
+  console.log('Search results:', results);
   
   // Sort by relevance
   return results.sort((a, b) => b.relevance - a.relevance);

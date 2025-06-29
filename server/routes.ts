@@ -9,14 +9,56 @@ import { z } from "zod";
 import { handleDevAPIRoute } from "./dev-api-handler";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Development API routes - handle Vercel functions in development
+  // Development API routes - use consolidated handler
   if (process.env.NODE_ENV === 'development') {
-    app.get('/api/auth/google', (req, res) => handleDevAPIRoute(req, res, 'auth/google'));
-    app.post('/api/auth/login', (req, res) => handleDevAPIRoute(req, res, 'auth/login'));
-    app.post('/api/auth/register', (req, res) => handleDevAPIRoute(req, res, 'auth/register'));
-    app.get('/api/auth/user', (req, res) => handleDevAPIRoute(req, res, 'auth/user'));
-    app.get('/api/logout', (req, res) => handleDevAPIRoute(req, res, 'logout'));
-    app.get('/api/test', (req, res) => handleDevAPIRoute(req, res, 'test'));
+    app.all('/api/*', async (req, res) => {
+      // Extract path from URL - remove /api/ prefix
+      const fullPath = req.originalUrl || req.url;
+      const apiPath = fullPath.replace('/api/', '');
+      
+      console.log('Development API call:', fullPath, 'extracted path:', apiPath);
+      
+      // Create Vercel-compatible request with path in query
+      const vercelReq = {
+        ...req,
+        query: { ...req.query, path: apiPath.split('/').filter(Boolean) },
+        method: req.method,
+        headers: req.headers,
+        body: req.body,
+        url: req.url,
+      } as any;
+
+      const vercelRes = {
+        status: (code: number) => {
+          res.status(code);
+          return vercelRes;
+        },
+        json: (data: any) => {
+          res.json(data);
+          return vercelRes;
+        },
+        redirect: (code: number | string, url?: string) => {
+          if (typeof code === 'string') {
+            res.redirect(code);
+          } else {
+            res.redirect(code, url || '');
+          }
+          return vercelRes;
+        },
+        setHeader: (name: string, value: string) => {
+          res.setHeader(name, value);
+          return vercelRes;
+        },
+      };
+
+      try {
+        const { default: handler } = await import('../api/[...path]');
+        await handler(vercelReq, vercelRes);
+      } catch (error) {
+        console.error('API Error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    });
   } else {
     // Production routes (not used in Vercel deployment)
     // Auth middleware

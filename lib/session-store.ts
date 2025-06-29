@@ -17,53 +17,47 @@ class SessionStore {
   // Session management
   createSession(email: string): string {
     const sessionToken = Math.random().toString(36).substring(2) + Date.now().toString(36);
-    const session = {
+    const sessionData = {
       email,
-      createdAt: new Date().toISOString(),
-      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours
+      createdAt: new Date(),
+      lastAccessed: new Date(),
     };
-    
-    this.sessions.set(`session_${sessionToken}`, session);
+    this.sessions.set(sessionToken, sessionData);
     return sessionToken;
   }
 
   getSession(sessionToken: string) {
-    return this.sessions.get(`session_${sessionToken}`);
+    return this.sessions.get(sessionToken);
   }
 
   deleteSession(sessionToken: string) {
-    this.sessions.delete(`session_${sessionToken}`);
+    this.sessions.delete(sessionToken);
   }
 
-  // Utility to parse cookies
+  // Helper methods
   parseCookies(cookieHeader?: string): Record<string, string> {
-    if (!cookieHeader) return {};
-    
-    return cookieHeader.split(';').reduce((acc, cookie) => {
-      const [key, value] = cookie.trim().split('=');
-      if (key && value) acc[key] = value;
-      return acc;
-    }, {} as Record<string, string>);
+    const cookies: Record<string, string> = {};
+    if (!cookieHeader) return cookies;
+
+    cookieHeader.split(';').forEach(cookie => {
+      const [name, value] = cookie.trim().split('=');
+      if (name && value) {
+        cookies[name] = decodeURIComponent(value);
+      }
+    });
+
+    return cookies;
   }
 
-  // Validate session and return user
   validateSession(sessionToken?: string) {
     if (!sessionToken) return null;
-
     const session = this.getSession(sessionToken);
     if (!session) return null;
-
-    // Check if session is expired
-    if (new Date() > new Date(session.expiresAt)) {
-      this.deleteSession(sessionToken);
-      return null;
-    }
-
-    // Return user data
-    const user = this.getUser(session.email);
-    return user;
+    
+    // Update last accessed time
+    session.lastAccessed = new Date();
+    return session;
   }
 }
 
-// Export singleton instance
 export const sessionStore = new SessionStore();

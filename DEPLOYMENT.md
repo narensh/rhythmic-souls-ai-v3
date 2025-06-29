@@ -29,6 +29,8 @@ git push origin main
 **For Basic Deployment (Current Setup):**
 No environment variables are required for the basic deployment. The app will work with mock data.
 
+**Note:** Authentication is simplified for Vercel deployment. Login functionality will redirect to a placeholder page. The main site features (search, content viewing, demos) work without authentication.
+
 **For Full Functionality (Optional):**
 Set these environment variables in your Vercel project settings:
 

@@ -57,8 +57,8 @@ const initializeApp = async () => {
         const projects = await storage.getUserProjects(userId);
         
         const stats = {
-          apiCalls: analytics.length,
-          sessions: analytics.filter(a => a.eventType === 'page_view').length,
+          apiCalls: analytics.reduce((sum, a) => sum + (a.searchQueries?.length || 0), 0),
+          sessions: analytics.length,
           projects: projects.length
         };
         

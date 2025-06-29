@@ -13,22 +13,24 @@ import {
 // Internal site content for search
 const siteContent = {
   services: [
-    { title: "Conversational AI", description: "AI-powered chatbots and voice assistants for customer engagement", section: "services" },
-    { title: "Agentic AI Solutions", description: "Autonomous AI agents for business process automation", section: "services" },
-    { title: "Call Centre Solutions", description: "AI-enhanced call center technology for improved customer service", section: "services" },
-    { title: "DevOps & CI/CD", description: "Continuous integration and deployment solutions", section: "services" },
-    { title: "MLOps Platform", description: "Machine learning operations and model management", section: "services" },
-    { title: "GPU & Infra Cost Optimization", description: "Cloud infrastructure optimization for reduced costs", section: "services" }
+    { title: "Conversational AI", description: "AI-powered chatbots voice assistants customer engagement chat support automated responses", section: "services" },
+    { title: "Agentic AI Solutions", description: "Autonomous AI agents business process automation intelligent workflow management", section: "services" },
+    { title: "Call Centre Solutions", description: "AI-enhanced call center technology customer service phone automation voice recognition", section: "services" },
+    { title: "DevOps & CI/CD", description: "Continuous integration deployment solutions development operations automation pipeline", section: "services" },
+    { title: "MLOps Platform", description: "Machine learning operations model management ML deployment artificial intelligence", section: "services" },
+    { title: "GPU & Infra Cost Optimization", description: "Cloud infrastructure optimization cost reduction server performance computing resources", section: "services" }
   ],
   features: [
-    { title: "Interactive Demo", description: "Try our AI solutions with live demonstrations", section: "content-creation" },
-    { title: "Content Creation", description: "AI-powered content generation tools", section: "content-creation" },
-    { title: "Music Tools", description: "AI music generation and audio processing", section: "music-tools" },
-    { title: "Latest News", description: "Industry news and AI technology updates", section: "news-feed" }
+    { title: "Interactive Demo", description: "Try our AI solutions with live demonstrations hands-on experience platform testing", section: "content-creation" },
+    { title: "Content Creation", description: "AI-powered content generation tools writing automation blog articles social media", section: "content-creation" },
+    { title: "Music Tools", description: "AI music generation audio processing sound synthesis creative tools", section: "music-tools" },
+    { title: "Latest News", description: "Industry news AI technology updates blog articles insights trends", section: "news-feed" }
   ],
   company: [
-    { title: "About Rhythmic Souls AI", description: "Leading provider of intelligent business solutions", section: "about" },
-    { title: "Contact", description: "Get in touch: info@rhythmicsouls.ai, +91-9220460200", section: "contact" }
+    { title: "About Rhythmic Souls AI", description: "Leading provider intelligent business solutions company information team mission", section: "about" },
+    { title: "Contact Us", description: "Get in touch info@rhythmicsouls.ai +91-9220460200 contact form support", section: "contact" },
+    { title: "Services", description: "AI business solutions conversational AI DevOps MLOps call center optimization", section: "services" },
+    { title: "Solutions", description: "Business automation AI integration digital transformation technology consulting", section: "services" }
   ]
 };
 
@@ -36,28 +38,46 @@ function searchSiteContent(query: string) {
   const searchTerm = query.toLowerCase().trim();
   const results: any[] = [];
   
-  console.log('Searching for:', searchTerm);
-  console.log('Site content:', siteContent);
+  if (!searchTerm) return results;
   
-  // Search through all content categories
+  // Search through all content categories with enhanced matching
   Object.entries(siteContent).forEach(([category, items]) => {
     items.forEach(item => {
-      const titleMatch = item.title.toLowerCase().includes(searchTerm);
-      const descMatch = item.description.toLowerCase().includes(searchTerm);
+      const titleLower = item.title.toLowerCase();
+      const descLower = item.description.toLowerCase();
       
-      if (titleMatch || descMatch) {
+      // Enhanced partial matching - split search term for multi-word queries
+      const searchWords = searchTerm.split(' ').filter(word => word.length > 0);
+      
+      let titleMatches = 0;
+      let descMatches = 0;
+      
+      searchWords.forEach(word => {
+        if (titleLower.includes(word)) titleMatches++;
+        if (descLower.includes(word)) descMatches++;
+      });
+      
+      // Match if any word matches either title or description
+      const hasMatch = titleMatches > 0 || descMatches > 0;
+      
+      if (hasMatch) {
+        // Calculate relevance based on match quality
+        let relevance = 0;
+        if (titleMatches === searchWords.length) relevance += 3; // All words in title
+        else if (titleMatches > 0) relevance += 2; // Some words in title
+        if (descMatches === searchWords.length) relevance += 2; // All words in description
+        else if (descMatches > 0) relevance += 1; // Some words in description
+        
         results.push({
           ...item,
           category: category.charAt(0).toUpperCase() + category.slice(1),
-          relevance: titleMatch ? 2 : 1
+          relevance: relevance
         });
       }
     });
   });
   
-  console.log('Search results:', results);
-  
-  // Sort by relevance
+  // Sort by relevance (highest first)
   return results.sort((a, b) => b.relevance - a.relevance);
 }
 

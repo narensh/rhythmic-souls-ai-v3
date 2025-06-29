@@ -5,7 +5,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { path } = req.query;
   const route = Array.isArray(path) ? path.join('/') : path || '';
 
-  console.log('API route called:', route, 'from path:', path);
+  console.log('Consolidated API handler called - Method:', req.method, 'Route:', route, 'Path:', path, 'URL:', req.url);
 
   try {
     // Auth routes

@@ -21,16 +21,27 @@ export function Navigation() {
         <div className="w-full">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              {/* Hamburger Menu Button - perfectly aligned with sidebar */}
+              {/* Single Hamburger Menu Button */}
               <div className="pl-4">
                 <Button
                   variant="ghost"
                   size="sm"
                   className="h-10 w-10 p-0 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
-                  onClick={toggleSidebar}
-                  title="Main menu"
+                  onClick={() => {
+                    // On desktop and tablet, toggle sidebar; on mobile, toggle mobile menu
+                    if (window.innerWidth >= 768) {
+                      toggleSidebar();
+                    } else {
+                      setMobileMenuOpen(!mobileMenuOpen);
+                    }
+                  }}
+                  title="Menu"
                 >
-                  <Menu className="h-6 w-6" />
+                  {mobileMenuOpen && window.innerWidth < 768 ? (
+                    <X className="h-6 w-6" />
+                  ) : (
+                    <Menu className="h-6 w-6" />
+                  )}
                 </Button>
               </div>
 
@@ -39,15 +50,20 @@ export function Navigation() {
                 <img
                   src={logoImage}
                   alt="Rhythmic Souls AI Logo"
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover"
                 />
-                <div>
-                  <h1 className="text-xl font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+                <div className="hidden sm:block">
+                  <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
                     Rhythmic Souls AI
                   </h1>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
                     Intelligent Business Solutions
                   </p>
+                </div>
+                <div className="block sm:hidden">
+                  <h1 className="text-sm font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+                    Rhythmic Souls
+                  </h1>
                 </div>
               </Link>
             </div>
@@ -130,28 +146,16 @@ export function Navigation() {
                 </Button>
               )}
 
-              {/* Mobile Menu Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                {mobileMenuOpen ? (
-                  <X className="h-4 w-4" />
-                ) : (
-                  <Menu className="h-4 w-4" />
-                )}
-              </Button>
+
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - Only show on mobile screens */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50 lg:hidden">
-          <div className="fixed left-0 top-0 bottom-0 w-64 bg-white dark:bg-slate-900 transform transition-transform duration-300">
+        <div className="fixed inset-0 bg-black/50 z-50 md:hidden">
+          <div className="fixed left-0 top-0 bottom-0 w-64 bg-white dark:bg-slate-900 transform transition-transform duration-300 shadow-lg">
             <div className="p-4">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-semibold">Menu</h3>

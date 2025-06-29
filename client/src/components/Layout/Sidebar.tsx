@@ -59,7 +59,7 @@ export function Sidebar() {
   };
 
   return (
-    <aside className={`fixed left-0 top-16 bottom-0 ${isCollapsed ? 'w-16' : 'w-80'} bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 transform -translate-x-full lg:translate-x-0 transition-all duration-300 z-40 overflow-y-auto`}>
+    <aside className={`fixed left-0 top-16 bottom-0 ${isCollapsed ? 'w-16' : 'w-80'} bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 transform -translate-x-full md:translate-x-0 transition-all duration-300 z-40 overflow-y-auto`}>
       <div className="p-4">
         {!isCollapsed && (
           <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">

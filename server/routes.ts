@@ -6,25 +6,36 @@ import { searchWithOpenAI } from "./services/openai";
 import { trackAnalytics } from "./services/analytics";
 import { insertNewsletterSubscriptionSchema } from "@shared/schema";
 import { z } from "zod";
+import { handleDevAPIRoute } from "./dev-api-handler";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Auth middleware
-  await setupAuth(app);
+  // Development API routes - handle Vercel functions in development
+  if (process.env.NODE_ENV === 'development') {
+    app.get('/api/auth/google', (req, res) => handleDevAPIRoute(req, res, 'auth/google'));
+    app.post('/api/auth/login', (req, res) => handleDevAPIRoute(req, res, 'auth/login'));
+    app.post('/api/auth/register', (req, res) => handleDevAPIRoute(req, res, 'auth/register'));
+    app.get('/api/auth/user', (req, res) => handleDevAPIRoute(req, res, 'auth/user'));
+    app.get('/api/logout', (req, res) => handleDevAPIRoute(req, res, 'logout'));
+  } else {
+    // Production routes (not used in Vercel deployment)
+    // Auth middleware
+    await setupAuth(app);
 
-  // Analytics middleware for all requests
-  app.use(trackAnalytics);
+    // Analytics middleware for all requests
+    app.use(trackAnalytics);
 
-  // Auth routes
-  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
-    try {
-      const userId = req.user.claims.sub;
-      const user = await storage.getUser(userId);
-      res.json(user);
-    } catch (error) {
-      console.error("Error fetching user:", error);
-      res.status(500).json({ message: "Failed to fetch user" });
-    }
-  });
+    // Auth routes
+    app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
+      try {
+        const userId = req.user.claims.sub;
+        const user = await storage.getUser(userId);
+        res.json(user);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        res.status(500).json({ message: "Failed to fetch user" });
+      }
+    });
+  }
 
   // Search endpoint
   app.post('/api/search', async (req, res) => {

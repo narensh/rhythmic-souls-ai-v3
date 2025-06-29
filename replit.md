@@ -147,6 +147,7 @@ ISSUER_URL=https://replit.com/oidc
 ## Changelog
 - June 28, 2025: Initial setup
 - June 28, 2025: Added Vercel deployment configuration
+- June 29, 2025: Fixed Google OAuth authentication system with shared session storage
 
 ## User Preferences
 

@@ -29,10 +29,11 @@ git push origin main
 **For Basic Deployment (Current Setup):**
 No environment variables are required for the basic deployment. The app will work with mock data.
 
-**Authentication System:** Full email/password authentication implemented with:
+**Authentication System:** Complete authentication with multiple methods:
 - Email/password registration and login forms
+- Google OAuth integration (fully configured)
 - Session-based authentication with HTTP-only cookies  
-- Google OAuth placeholder (requires additional setup)
+- Shared session storage across all auth methods
 - Proper user management and session handling
 
 **API Routes (Vercel Compatible):**

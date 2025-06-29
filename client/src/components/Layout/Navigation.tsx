@@ -17,7 +17,7 @@ export function Navigation() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 z-50">
-        <div className="max-w-1xl mx-auto">
+        <div className="w-full">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               {/* Hamburger Menu Button - perfectly aligned with sidebar */}
@@ -52,7 +52,7 @@ export function Navigation() {
             </div>
 
             {/* Navigation Items */}
-            <div className="hidden md:flex items-center space-x-8 pr-4 sm:pr-6 lg:pr-8">
+            <div className="hidden md:flex items-center space-x-8">
               <a
                 href="#services"
                 className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
@@ -80,7 +80,7 @@ export function Navigation() {
             </div>
 
             {/* Right Side Actions */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 pr-4 sm:pr-6 lg:pr-8">
               {/* Search */}
               <div className="hidden lg:block">
                 <SearchBar />

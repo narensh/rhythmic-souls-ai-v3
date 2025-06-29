@@ -9,59 +9,23 @@
       }
     },
     {
+      "src": "api/health.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/auth/google.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/auth/user.ts",
+      "use": "@vercel/node"
+    },
+    {
       "src": "api/[...path].ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    {
-      "src": "/api/health",
-      "dest": "/api/health"
-    },
-    {
-      "src": "/api/auth/google",
-      "dest": "/api/auth/google"
-    },
-    {
-      "src": "/api/auth/login",
-      "dest": "/api/auth/login"
-    },
-    {
-      "src": "/api/auth/register",
-      "dest": "/api/auth/register"
-    },
-    {
-      "src": "/api/auth/user",
-      "dest": "/api/auth/user"
-    },
-    {
-      "src": "/api/logout",
-      "dest": "/api/logout"
-    },
-    {
-      "src": "/api/news",
-      "dest": "/api/news"
-    },
-    {
-      "src": "/api/testimonials",
-      "dest": "/api/testimonials"
-    },
-    {
-      "src": "/api/dashboard",
-      "dest": "/api/dashboard"
-    },
-    {
-      "src": "/api/test",
-      "dest": "/api/test"
-    },
-    {
-      "src": "/api/debug-oauth",
-      "dest": "/api/debug-oauth"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "/dist/public/$1"

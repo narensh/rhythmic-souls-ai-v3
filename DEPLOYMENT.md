@@ -40,11 +40,16 @@ No environment variables are required for the basic deployment. The app will wor
 - `/api/auth/login` - Email/password login
 - `/api/auth/register` - User registration  
 - `/api/auth/user` - Get current user session
-- `/api/auth/google` - Google OAuth (placeholder)
+- `/api/auth/google` - Google OAuth (fully functional)
 - `/api/logout` - Clear session and logout
 - `/api/news.ts` - Serves news articles
 - `/api/testimonials.ts` - Serves customer testimonials
 - `/api/dashboard.ts` - Serves dashboard data
+
+**Google OAuth Setup:**
+To enable Google authentication, add these redirect URIs in Google Cloud Console:
+- Development: `http://localhost:5000/api/auth/google`
+- Production: `https://v3.rhythmicsouls.ai/api/auth/google`
 
 **For Full Functionality (Optional):**
 Set these environment variables in your Vercel project settings:

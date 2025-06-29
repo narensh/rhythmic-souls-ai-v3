@@ -10,19 +10,23 @@ This guide explains how to deploy the Rhythmic Souls AI application to Vercel.
 
 ## Required Environment Variables
 
+**For Basic Deployment (Current Setup):**
+No environment variables are required for the basic deployment. The app will work with mock data.
+
+**For Full Functionality (Optional):**
 Set these environment variables in your Vercel project settings:
 
 ```bash
-# Database Configuration (Required)
+# Database Configuration (Optional - for production data)
 DATABASE_URL=your_postgresql_connection_string
 
-# OpenAI Integration (Required for search functionality)
+# OpenAI Integration (Optional - for search functionality)
 OPENAI_API_KEY=your_openai_api_key
 
-# Session Security (Required)
+# Session Security (Optional - for authentication)
 SESSION_SECRET=your_secure_random_string
 
-# Replit Auth Configuration (Required)
+# Replit Auth Configuration (Optional - for user login)
 REPLIT_DOMAINS=your-vercel-domain.vercel.app
 REPL_ID=your_replit_app_id
 ISSUER_URL=https://replit.com/oidc

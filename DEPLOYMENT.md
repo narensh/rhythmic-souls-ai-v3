@@ -2,6 +2,22 @@
 
 This guide explains how to deploy the Rhythmic Souls AI application to Vercel.
 
+## Git Author Configuration Fix
+
+If you see "A commit author is required" error during deployment, configure Git first:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
+Then commit and push your changes:
+```bash
+git add .
+git commit -m "Initial deployment setup"
+git push origin main
+```
+
 ## Prerequisites
 
 1. A Vercel account (https://vercel.com)

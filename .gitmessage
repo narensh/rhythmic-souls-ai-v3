@@ -1,0 +1,9 @@
+# Rhythmic Souls AI - Deployment Setup
+
+# Summary: Initial deployment configuration for Vercel
+# 
+# This commit includes:
+# - Fixed Vercel configuration for proper deployment
+# - Updated API routes for Vercel compatibility  
+# - Mobile search bar alignment improvements
+# - Internal site search functionality

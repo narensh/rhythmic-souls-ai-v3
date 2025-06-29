@@ -48,8 +48,11 @@ No environment variables are required for the basic deployment. The app will wor
 
 **Google OAuth Setup:**
 To enable Google authentication, add these redirect URIs in Google Cloud Console:
-- Development: `http://localhost:5000/api/auth/google`
+- Development (localhost): `http://localhost:5000/api/auth/google`
+- Development (Replit): `https://ce9f20fc-852d-4f58-bead-167cd299e38c-00-213uay6x6sse5.kirk.replit.dev/api/auth/google`
 - Production: `https://v3.rhythmicsouls.ai/api/auth/google`
+
+**Note:** The Replit development URL changes periodically. If you encounter `redirect_uri_mismatch` errors, check the current Replit URL and update it in Google Cloud Console.
 
 **Vercel Free Plan Optimization:**
 Created a consolidated API handler (`api/[...path].ts`) that manages all routes internally, reducing serverless function count from 13 to 1. This eliminates Vercel's 12-function limit issue on the Hobby plan while maintaining full API functionality.

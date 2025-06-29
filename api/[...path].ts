@@ -71,7 +71,18 @@ async function handleGoogleAuth(req: VercelRequest, res: VercelResponse) {
       // Redirect to Google OAuth
       const host = req.headers.host || 'localhost:5000';
       const protocol = host.includes('localhost') ? 'http' : 'https';
-      const redirectUri = `${protocol}://${host}/api/auth/google`;
+      
+      // For development, use a consistent redirect URI that's registered in Google Cloud Console
+      let redirectUri;
+      if (host.includes('localhost')) {
+        redirectUri = 'http://localhost:5000/api/auth/google';
+      } else if (host.includes('replit.dev')) {
+        // Use the current Replit dev URL - this needs to be registered in Google Cloud Console
+        redirectUri = `${protocol}://${host}/api/auth/google`;
+      } else {
+        // Production
+        redirectUri = `${protocol}://${host}/api/auth/google`;
+      }
       const scope = 'openid email profile';
       const responseType = 'code';
       

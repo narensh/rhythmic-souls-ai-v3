@@ -2,7 +2,7 @@ import { Navigation } from "@/components/Layout/Navigation";
 import { HeroSection } from "@/components/Hero/HeroSection";
 import { ServicesGrid } from "@/components/Services/ServicesGrid";
 import { InteractiveDemo } from "@/components/Demo/InteractiveDemo";
-import { CodeEditor } from "@/components/Education/CodeEditor";
+
 import { MusicTools } from "@/components/Music/MusicTools";
 import { NewsSection } from "@/components/News/NewsSection";
 import { TestimonialsSection } from "@/components/Testimonials/TestimonialsSection";
@@ -25,7 +25,7 @@ export default function Landing() {
         <HeroSection />
         <ServicesGrid />
         <InteractiveDemo />
-        <CodeEditor />
+
         <MusicTools />
         <NewsSection />
         <TestimonialsSection />

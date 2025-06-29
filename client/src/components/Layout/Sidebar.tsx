@@ -1,38 +1,20 @@
 import { Link } from 'wouter';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { 
-  Bot, 
-  Cog, 
-  Headphones, 
-  GitBranch, 
-  Brain, 
-  Cpu, 
+  Settings, 
   Edit, 
   Newspaper, 
-  Music, 
-  GraduationCap, 
-  Book,
+  Music,
   Mail,
   Phone,
   Menu
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const mainServices = [
-  { href: 'services', icon: Bot, label: 'Conversational AI', color: 'text-purple-500' },
-  { href: 'services', icon: Cog, label: 'Agentic AI Solutions', color: 'text-blue-500' },
-  { href: 'services', icon: Headphones, label: 'Call Centre Solutions', color: 'text-green-500' },
-  { href: 'services', icon: GitBranch, label: 'DevOps & CI/CD', color: 'text-orange-500' },
-  { href: 'services', icon: Brain, label: 'MLOps Platform', color: 'text-pink-500' },
-  { href: 'services', icon: Cpu, label: 'GPU Optimization', color: 'text-red-500' },
-];
-
 const additionalTools = [
   { href: 'content-creation', icon: Edit, label: 'Content Creation', color: 'text-purple-400' },
   { href: 'news-feed', icon: Newspaper, label: 'Latest News', color: 'text-blue-400' },
   { href: 'music-tools', icon: Music, label: 'Music Tools', color: 'text-green-400' },
-  { href: 'education', icon: GraduationCap, label: 'Education Platform', color: 'text-yellow-400' },
-  { href: 'resources', icon: Book, label: 'Resources Library', color: 'text-indigo-400' },
 ];
 
 export function Sidebar() {
@@ -85,17 +67,14 @@ export function Sidebar() {
           </h3>
         )}
         <nav className="space-y-2">
-          {mainServices.map((service) => (
-            <button
-              key={service.href}
-              onClick={() => handleServiceClick(service.href)}
-              className={`flex items-center ${isCollapsed ? 'justify-center' : 'space-x-3'} p-3 w-full rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group`}
-              title={isCollapsed ? service.label : ''}
-            >
-              <service.icon className={`${isCollapsed ? 'h-6 w-6' : 'h-5 w-5'} ${service.color}`} />
-              {!isCollapsed && <span className="text-sm font-medium">{service.label}</span>}
-            </button>
-          ))}
+          <button
+            onClick={() => handleServiceClick('#services')}
+            className={`flex items-center ${isCollapsed ? 'justify-center' : 'space-x-3'} p-3 w-full rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group`}
+            title={isCollapsed ? 'Our Services' : ''}
+          >
+            <Menu className={`${isCollapsed ? 'h-6 w-6' : 'h-5 w-5'} text-purple-500`} />
+            {!isCollapsed && <span className="text-sm font-medium">Our Services</span>}
+          </button>
         </nav>
 
         {!isCollapsed && <hr className="my-6 border-slate-200 dark:border-slate-700" />}

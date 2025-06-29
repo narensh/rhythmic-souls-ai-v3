@@ -54,10 +54,12 @@ To enable Google authentication, add these redirect URIs in Google Cloud Console
 
 **Note:** The Replit development URL changes periodically. If you encounter `redirect_uri_mismatch` errors, check the current Replit URL and update it in Google Cloud Console.
 
-**Vercel Free Plan Optimization:**
-Created a consolidated API handler (`api/[...path].ts`) that manages all routes internally, reducing serverless function count from 13 to 1. This eliminates Vercel's 12-function limit issue on the Hobby plan while maintaining full API functionality.
-
-**Important:** The `vercel.json` now uses the `functions` configuration instead of `builds` for better compatibility with catch-all API routes.
+**Vercel Deployment Strategy:**
+Using Vercel's convention-based routing without vercel.json for maximum compatibility:
+- Individual API files for critical endpoints (health.ts, auth/google.ts, auth/user.ts, debug-oauth.ts)
+- Consolidated fallback handler (api/[...path].ts) for remaining routes
+- Automatic static file serving from build output
+- No custom routing configuration to avoid deployment conflicts
 
 **For Full Functionality (Optional):**
 Set these environment variables in your Vercel project settings:

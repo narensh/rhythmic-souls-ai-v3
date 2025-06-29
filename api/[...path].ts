@@ -3,7 +3,10 @@ import { sessionStore } from '../lib/session-store';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { path } = req.query;
-  const route = Array.isArray(path) ? path.join('/') : path || '';
+  let route = Array.isArray(path) ? path.join('/') : path || '';
+  
+  // Remove query parameters from route matching
+  route = route.split('?')[0];
 
   console.log('Consolidated API handler called - Method:', req.method, 'Route:', route, 'Path:', path, 'URL:', req.url);
 
@@ -37,6 +40,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
     if (route === 'test') {
       return await handleTest(req, res);
+    }
+    if (route === 'debug-oauth') {
+      return await handleDebugOAuth(req, res);
     }
 
     return res.status(404).json({ error: 'Route not found' });
@@ -92,6 +98,9 @@ async function handleGoogleAuth(req: VercelRequest, res: VercelResponse) {
       googleAuthUrl.searchParams.set('response_type', responseType);
       googleAuthUrl.searchParams.set('scope', scope);
       googleAuthUrl.searchParams.set('state', state as string || 'default');
+      
+      console.log('Google OAuth redirect URI being used:', redirectUri);
+      console.log('Host detected:', host, 'Protocol:', protocol);
       
       return res.redirect(googleAuthUrl.toString());
     }
@@ -363,6 +372,30 @@ async function handleTest(req: VercelRequest, res: VercelResponse) {
     timestamp: new Date().toISOString(),
     method: req.method,
     host: req.headers.host 
+  });
+}
+
+// Debug OAuth handler
+async function handleDebugOAuth(req: VercelRequest, res: VercelResponse) {
+  const host = req.headers.host || 'localhost:5000';
+  const protocol = host.includes('localhost') ? 'http' : 'https';
+  
+  let redirectUri;
+  if (host.includes('localhost')) {
+    redirectUri = 'http://localhost:5000/api/auth/google';
+  } else if (host.includes('replit.dev')) {
+    redirectUri = `${protocol}://${host}/api/auth/google`;
+  } else {
+    redirectUri = `${protocol}://${host}/api/auth/google`;
+  }
+  
+  return res.status(200).json({ 
+    message: 'OAuth Debug Info',
+    host: host,
+    protocol: protocol,
+    redirectUri: redirectUri,
+    environmentDomain: process.env.REPLIT_DOMAINS,
+    timestamp: new Date().toISOString()
   });
 }
 

@@ -43,7 +43,7 @@ export async function handleDevAPIRoute(req: Request, res: Response, apiPath: st
     };
 
     // Import and execute the API function
-    const apiFilePath = path.resolve(__dirname, '..', 'api', `${apiPath}.ts`);
+    const apiFilePath = path.resolve(__dirname, '..', 'apis', `${apiPath}.ts`);
     const { default: handler } = await import(apiFilePath);
     
     await handler(vercelReq, vercelRes);

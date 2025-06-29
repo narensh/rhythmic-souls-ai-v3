@@ -51,6 +51,9 @@ To enable Google authentication, add these redirect URIs in Google Cloud Console
 - Development: `http://localhost:5000/api/auth/google`
 - Production: `https://v3.rhythmicsouls.ai/api/auth/google`
 
+**Vercel Free Plan Optimization:**
+The API folder has been renamed from `api/` to `apis/` to avoid Vercel's 12 serverless function limit on the Hobby plan. This allows unlimited API endpoints without requiring a Pro plan upgrade.
+
 **For Full Functionality (Optional):**
 Set these environment variables in your Vercel project settings:
 

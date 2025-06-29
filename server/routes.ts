@@ -16,6 +16,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     app.post('/api/auth/register', (req, res) => handleDevAPIRoute(req, res, 'auth/register'));
     app.get('/api/auth/user', (req, res) => handleDevAPIRoute(req, res, 'auth/user'));
     app.get('/api/logout', (req, res) => handleDevAPIRoute(req, res, 'logout'));
+    app.get('/api/test', (req, res) => handleDevAPIRoute(req, res, 'test'));
   } else {
     // Production routes (not used in Vercel deployment)
     // Auth middleware

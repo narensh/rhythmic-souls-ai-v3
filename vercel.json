@@ -3,14 +3,7 @@
   "builds": [
     {
       "src": "server/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": [
-          "server/**",
-          "shared/**",
-          "dist/**"
-        ]
-      }
+      "use": "@vercel/node"
     },
     {
       "src": "package.json",
@@ -29,13 +22,5 @@
       "src": "/(.*)",
       "dest": "/dist/public/$1"
     }
-  ],
-  "functions": {
-    "server/index.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }

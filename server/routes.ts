@@ -1,12 +1,12 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { setupAuth, isAuthenticated } from "./replitAuth";
-import { searchWithOpenAI } from "./services/openai";
-import { trackAnalytics } from "./services/analytics";
+import { storage } from "./storage.js";
+import { setupAuth, isAuthenticated } from "./replitAuth.js";
+import { searchWithOpenAI } from "./services/openai.js";
+import { trackAnalytics } from "./services/analytics.js";
 import { insertNewsletterSubscriptionSchema } from "@shared/schema";
 import { z } from "zod";
-import { handleDevAPIRoute } from "./dev-api-handler";
+import { handleDevAPIRoute } from "./dev-api-handler.js";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Development API routes - use consolidated handler

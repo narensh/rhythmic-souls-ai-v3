@@ -150,6 +150,7 @@ ISSUER_URL=https://replit.com/oidc
 - June 29, 2025: Fixed Google OAuth authentication system with shared session storage
 - June 29, 2025: Implemented consolidated API architecture (api/[...path].ts) to resolve Vercel function limits
 - June 29, 2025: Google OAuth working perfectly in development environment (Replit domain)
+- June 29, 2025: Fixed ES Module imports by adding .js extensions to all relative imports for Vercel production compatibility
 
 ## User Preferences
 

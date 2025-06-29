@@ -55,11 +55,12 @@ To enable Google authentication, add these redirect URIs in Google Cloud Console
 **Note:** The Replit development URL changes periodically. If you encounter `redirect_uri_mismatch` errors, check the current Replit URL and update it in Google Cloud Console.
 
 **Vercel Deployment Strategy:**
-Single serverless function approach for maximum compatibility:
+Single serverless function approach with ES Module compatibility:
 - All API routes handled by `server/index.ts` as one Vercel Node.js function
 - Development handler in `server/dev-api-handler.ts` provides consolidated API logic
 - Static file serving from build output (`dist/public`)
 - vercel.json routes all `/api/*` requests to the Node.js server function
+- All relative imports updated with `.js` extensions for production compatibility
 
 **For Full Functionality (Optional):**
 Set these environment variables in your Vercel project settings:

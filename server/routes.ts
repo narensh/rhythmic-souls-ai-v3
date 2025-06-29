@@ -52,8 +52,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       };
 
       try {
-        const { default: handler } = await import('../api/[...path]');
-        await handler(vercelReq, vercelRes);
+        // Use the development API handler
+        await handleDevAPIRoute(req, res, apiPath);
       } catch (error) {
         console.error('API Error:', error);
         res.status(500).json({ error: 'Internal server error' });

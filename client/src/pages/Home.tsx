@@ -20,7 +20,7 @@ export default function Home() {
       <Navigation />
       <Sidebar />
       
-      <main className={`pt-16 min-h-screen transition-all duration-300 ${isCollapsed ? 'lg:ml-16' : 'lg:ml-64'}`}>
+      <main className={`pt-16 min-h-screen transition-all duration-300 ${isCollapsed ? 'lg:ml-16' : 'lg:ml-80'}`}>
         <HeroSection />
         <UserDashboard />
         <div id="services">

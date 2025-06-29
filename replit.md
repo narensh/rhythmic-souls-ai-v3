@@ -125,8 +125,28 @@ This is a full-stack web application for Rhythmic Souls AI, a company providing 
 - **CDN**: Font Awesome and external assets loaded from CDN
 - **Monitoring**: Built-in request logging and error handling
 
+## Deployment
+
+### Vercel Configuration
+- **vercel.json**: Full-stack deployment configuration with API routes and static serving
+- **Build Process**: Vite builds frontend to `dist/public`, esbuild bundles backend to `dist/index.js`
+- **Environment Variables**: DATABASE_URL, OPENAI_API_KEY, SESSION_SECRET, REPLIT_DOMAINS required
+- **Database**: PostgreSQL (Neon, Vercel Postgres, or external provider)
+- **Authentication**: Replit Auth configured for production domains
+
+### Required Environment Variables
+```
+DATABASE_URL=postgresql://...
+OPENAI_API_KEY=sk-...
+SESSION_SECRET=secure-random-string
+REPLIT_DOMAINS=your-domain.vercel.app
+REPL_ID=your-replit-app-id
+ISSUER_URL=https://replit.com/oidc
+```
+
 ## Changelog
-- June 28, 2025. Initial setup
+- June 28, 2025: Initial setup
+- June 28, 2025: Added Vercel deployment configuration
 
 ## User Preferences
 

@@ -9,6 +9,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   route = route.split('?')[0];
 
   console.log('Consolidated API handler called - Method:', req.method, 'Route:', route, 'Path:', path, 'URL:', req.url);
+  console.log('Full query params:', req.query);
+  console.log('Environment check - VERCEL:', process.env.VERCEL);
+  
+  // Add a simple health check endpoint to verify the handler is working
+  if (route === 'health') {
+    return res.status(200).json({
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      environment: process.env.VERCEL ? 'production' : 'development',
+      route: route,
+      path: path
+    });
+  }
 
   try {
     // Auth routes

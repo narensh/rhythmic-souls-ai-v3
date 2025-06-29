@@ -1,8 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-
-// Simple in-memory user store for demo purposes
-// In production, this would be a proper database
-const users = new Map();
+import { sessionStore } from '../lib/session-store.js';
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -16,19 +13,16 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // Check if user exists and password matches
-  const user = users.get(email);
+  const user = sessionStore.getUser(email);
   if (!user || user.password !== password) {
     return res.status(401).json({ message: 'Invalid credentials' });
   }
 
-  // Create a session token (in production, use proper JWT)
-  const sessionToken = `session_${Date.now()}_${Math.random().toString(36)}`;
-  
-  // Store session (in production, use proper session store)
-  users.set(`session_${sessionToken}`, { userId: user.id, email: user.email });
+  // Create session token
+  const sessionToken = sessionStore.createSession(email);
 
   // Set session cookie
-  res.setHeader('Set-Cookie', `session=${sessionToken}; HttpOnly; Path=/; Max-Age=86400`);
+  res.setHeader('Set-Cookie', `session=${sessionToken}; HttpOnly; Path=/; Max-Age=86400; SameSite=Lax`);
 
   // Return user data (without password)
   const { password: _, ...userWithoutPassword } = user;

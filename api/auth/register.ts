@@ -1,7 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-
-// Simple in-memory user store for demo purposes
-const users = new Map();
+import { sessionStore } from '../lib/session-store.js';
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -15,7 +13,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // Check if user already exists
-  if (users.has(email)) {
+  if (sessionStore.getUser(email)) {
     return res.status(409).json({ message: 'User already exists with this email' });
   }
 
@@ -33,16 +31,13 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   };
 
   // Store user
-  users.set(email, newUser);
+  sessionStore.setUser(email, newUser);
 
-  // Create a session token
-  const sessionToken = `session_${Date.now()}_${Math.random().toString(36)}`;
-  
-  // Store session
-  users.set(`session_${sessionToken}`, { userId: newUser.id, email: newUser.email });
+  // Create session token
+  const sessionToken = sessionStore.createSession(email);
 
   // Set session cookie
-  res.setHeader('Set-Cookie', `session=${sessionToken}; HttpOnly; Path=/; Max-Age=86400`);
+  res.setHeader('Set-Cookie', `session=${sessionToken}; HttpOnly; Path=/; Max-Age=86400; SameSite=Lax`);
 
   // Return user data (without password)
   const { password: _, ...userWithoutPassword } = newUser;

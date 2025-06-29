@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,32 @@ export default function AuthPage() {
   const [, setLocation] = useLocation();
   const { user, isLoading } = useAuth();
   const { toast } = useToast();
+
+  // Handle OAuth error/success parameters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    const message = urlParams.get('message');
+    const auth = urlParams.get('auth');
+
+    if (error) {
+      toast({
+        title: "Authentication Error",
+        description: decodeURIComponent(message || 'Google OAuth failed'),
+        variant: "destructive",
+      });
+      // Clean up URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (auth === 'success') {
+      toast({
+        title: "Login successful",
+        description: "Welcome! You've been successfully authenticated.",
+      });
+      // Clean up URL and redirect
+      window.history.replaceState({}, document.title, window.location.pathname);
+      setTimeout(() => setLocation("/"), 1000);
+    }
+  }, [toast, setLocation]);
   
   // Login form state
   const [loginForm, setLoginForm] = useState({

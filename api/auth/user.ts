@@ -1,7 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-
-// Simple in-memory session store for demo purposes
-const users = new Map();
+import { sessionStore } from '../lib/session-store.js';
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {
@@ -9,28 +7,14 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // Get session from cookie
-  const cookies = req.headers.cookie?.split(';').reduce((acc, cookie) => {
-    const [key, value] = cookie.trim().split('=');
-    acc[key] = value;
-    return acc;
-  }, {} as Record<string, string>) || {};
-
+  const cookies = sessionStore.parseCookies(req.headers.cookie);
   const sessionToken = cookies.session;
   
-  if (!sessionToken) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-
-  // Check session
-  const session = users.get(`session_${sessionToken}`);
-  if (!session) {
-    return res.status(401).json({ message: 'Invalid session' });
-  }
-
-  // Get user data
-  const user = users.get(session.email);
+  // Validate session and get user
+  const user = sessionStore.validateSession(sessionToken);
+  
   if (!user) {
-    return res.status(401).json({ message: 'User not found' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   // Return user data (without password)

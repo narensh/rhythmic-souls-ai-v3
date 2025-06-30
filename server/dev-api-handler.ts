@@ -196,5 +196,19 @@ async function handleAPIRoute(req: any, res: any, route: string) {
     ]);
   }
 
+  // Debug endpoint to check environment and routing
+  if (route === 'debug-oauth') {
+    return res.status(200).json({
+      route: route,
+      hasClientId: !!process.env.GOOGLE_CLIENT_ID,
+      hasClientSecret: !!process.env.GOOGLE_CLIENT_SECRET,
+      environment: process.env.NODE_ENV || 'unknown',
+      host: req.headers.host,
+      protocol: req.headers['x-forwarded-proto'] || 'http',
+      originalUrl: req.originalUrl || req.url,
+      method: req.method
+    });
+  }
+
   return res.status(404).json({ error: 'Route not found', route });
 }

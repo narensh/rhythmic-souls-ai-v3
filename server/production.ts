@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { registerRoutes } from "./routes.js";
 
 const app = express();
@@ -44,16 +44,20 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
-// Track initialization state
-let routesInitialized = false;
+// Initialize routes once
+let initialized = false;
 
-// For Vercel, we export the app directly
-export default async function handler(req: any, res: any) {
-  // Initialize routes if not already done
-  if (!routesInitialized) {
+async function initializeApp() {
+  if (!initialized) {
     await registerRoutes(app);
-    routesInitialized = true;
+    initialized = true;
   }
+}
+
+// Vercel handler
+export default async function handler(req: Request, res: Response) {
+  await initializeApp();
   
-  return app(req, res);
+  // Use the Express app as middleware
+  app(req, res);
 }

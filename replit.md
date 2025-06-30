@@ -152,6 +152,7 @@ ISSUER_URL=https://replit.com/oidc
 - June 29, 2025: Google OAuth working perfectly in development environment (Replit domain)
 - June 29, 2025: Fixed ES Module imports by adding .js extensions to all relative imports for Vercel production compatibility
 - June 30, 2025: Fixed path alias resolution by replacing @shared/ imports with relative paths (../shared/schema.js) for production compatibility
+- June 30, 2025: Created production-optimized server (server/production.ts) to bypass Vite dependencies in Vercel deployment
 
 ## User Preferences
 

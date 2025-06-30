@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "server/index.ts",
+      "src": "server/production.ts",
       "use": "@vercel/node",
       "config": {
         "includeFiles": ["lib/**", "shared/**", "server/**"]
@@ -19,7 +19,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server/index.ts"
+      "dest": "/server/production.ts"
     },
     {
       "src": "/(.*)",

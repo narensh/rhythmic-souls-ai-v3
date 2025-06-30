@@ -4,7 +4,7 @@ import { storage } from "./storage.js";
 import { setupAuth, isAuthenticated } from "./replitAuth.js";
 import { searchWithOpenAI } from "./services/openai.js";
 import { trackAnalytics } from "./services/analytics.js";
-import { insertNewsletterSubscriptionSchema } from "@shared/schema";
+import { insertNewsletterSubscriptionSchema } from "../shared/schema.js";
 import { z } from "zod";
 import { handleDevAPIRoute } from "./dev-api-handler.js";
 

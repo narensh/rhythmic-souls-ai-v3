@@ -17,7 +17,7 @@ import {
   type InsertNewsletterSubscription,
   type Testimonial,
   type InsertTestimonial,
-} from "@shared/schema";
+} from "../shared/schema.js";
 import { db } from "./db.js";
 import { eq, desc, and } from "drizzle-orm";
 

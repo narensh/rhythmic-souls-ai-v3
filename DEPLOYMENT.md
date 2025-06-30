@@ -61,6 +61,7 @@ Single serverless function approach with ES Module compatibility:
 - Static file serving from build output (`dist/public`)
 - vercel.json routes all `/api/*` requests to the Node.js server function
 - All relative imports updated with `.js` extensions for production compatibility
+- All `@shared/` imports replaced with relative paths (`../shared/schema.js`) for Vercel compatibility
 
 **For Full Functionality (Optional):**
 Set these environment variables in your Vercel project settings:

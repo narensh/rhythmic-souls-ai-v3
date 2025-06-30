@@ -167,6 +167,23 @@ async function handleAPIRoute(req: any, res: any, route: string) {
     }
   }
 
+  // Logout
+  if (route === 'auth/logout') {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method not allowed' });
+    }
+
+    const cookies = sessionStore.parseCookies(req.headers.cookie);
+    const sessionToken = cookies.session;
+
+    if (sessionToken) {
+      sessionStore.deleteSession(sessionToken);
+    }
+
+    res.setHeader('Set-Cookie', 'session=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax');
+    return res.status(200).json({ message: 'Logged out successfully' });
+  }
+
   // Mock data for development
   if (route === 'news') {
     return res.status(200).json([

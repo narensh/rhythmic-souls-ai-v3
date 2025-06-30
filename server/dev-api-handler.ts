@@ -53,6 +53,11 @@ export async function handleDevAPIRoute(req: Request, res: Response, apiPath: st
 
 // Consolidated API route handler
 async function handleAPIRoute(req: any, res: any, route: string) {
+  var originalRoute = route;
+  if (originalRoute && originalRoute.length > 0) {
+   route = originalRoute.split('?')[0];
+  }
+
   // Health check
   if (route === 'health') {
     return res.status(200).json({

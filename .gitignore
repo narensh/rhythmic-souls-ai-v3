@@ -6,3 +6,4 @@ vite.config.ts.*
 *.tar.gz
 .idea
 .vercel
+rhythmic-souls-ai-v3.iml

@@ -7,3 +7,5 @@ vite.config.ts.*
 .idea
 .vercel
 rhythmic-souls-ai-v3.iml
+*.patch
+.env

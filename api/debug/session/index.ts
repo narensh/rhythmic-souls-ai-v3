@@ -7,9 +7,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+
     const cookies = databaseSessionStore.parseCookies(req.headers.cookie);
+    console.log("cookies: ", cookies);
     const sessionToken = cookies.session;
-    
+    console.log("sessionToken: ", sessionToken);
     const debugInfo = {
       timestamp: new Date().toISOString(),
       environment: process.env.NODE_ENV || 'production',
@@ -27,18 +29,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       sessionEmail: "",
       sessionCreated: new Date(),
       lastActivity: new Date(),
+      accessToken: "",
       sessionError: ""
     };
 
     if (sessionToken) {
       try {
         const session = await databaseSessionStore.validateSession(sessionToken);
+        console.log("session: ", session);
         debugInfo.sessionValid = !!session;
         if (session) {
           debugInfo.sessionEmail = session.email;
           debugInfo.sessionCreated = session.createdAt;
           debugInfo.lastActivity = session.lastActivity;
-        }
+          debugInfo.accessToken = sessionToken;
+          console.log("session is valid: ", session);
+        } else { console.log("session is invalid: ", session); }
       } catch (error) {
 //         debugInfo.sessionError = error;
         console.log("error: ", error);

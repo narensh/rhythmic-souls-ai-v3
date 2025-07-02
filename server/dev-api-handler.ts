@@ -109,6 +109,8 @@ async function handleAPIRoute(req: any, res: any, route: string) {
             return res.status(400).json({ error: 'Failed to exchange code for tokens' });
           }
 
+          console.log("Access token received:", tokens.access_token);
+
           const userResponse = await fetch(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${tokens.access_token}`);
           const userData = await userResponse.json();
 
@@ -122,7 +124,10 @@ async function handleAPIRoute(req: any, res: any, route: string) {
             refreshToken: tokens.refresh_token,
           });
 
+          console.log("User data set in session store:", userData);
+
           const sessionToken = await databaseSessionStore.createSession(userData.email);
+          console.log("creating session in db for user", userData.email, "session token:", sessionToken);
           res.setHeader('Set-Cookie', `session=${sessionToken}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${7 * 24 * 60 * 60}`);
           return res.redirect('/');
         } catch (error) {

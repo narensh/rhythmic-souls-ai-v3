@@ -81,9 +81,9 @@ export class DatabaseSessionStore {
     }
   }
 
-  async createSession(email: string): Promise<string> {
+  async createSession(email: string, sessionToken: string): Promise<string> {
     const database = getDatabase();
-    const sessionToken = randomBytes(32).toString('hex');
+//     const sessionToken = randomBytes(32).toString('hex');
     const expireDate = new Date(Date.now() + this.TTL);
     
     const sessionData: SessionData = {
@@ -159,6 +159,7 @@ export class DatabaseSessionStore {
   }
 
   async validateSession(sessionToken?: string): Promise<SessionData | null> {
+    console.log("validateSession::sessionToken: ", sessionToken);
     if (!sessionToken) {
       return null;
     }

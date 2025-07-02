@@ -9,17 +9,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const cookies = databaseSessionStore.parseCookies(req.headers.cookie);
     const sessionToken = cookies.session;
+    console.log("auth/user::sessionToken: ", sessionToken);
 
     if (!sessionToken) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
     const session = await databaseSessionStore.validateSession(sessionToken);
+    console.log("auth/user::session: ", session);
     if (!session) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
     const user = await databaseSessionStore.getUser(session.email);
+    console.log("auth/user::user: ", user);
     if (!user) {
       return res.status(401).json({ message: 'Unauthorized' });
     }

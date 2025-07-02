@@ -15,8 +15,5 @@
         "distDir": "dist/public"
       }
     }
-  ],
-  "rewrites":  [
-    {"source": "/(.*)", "destination": "/"}
   ]
 }

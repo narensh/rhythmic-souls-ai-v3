@@ -232,5 +232,47 @@ async function handleAPIRoute(req: any, res: any, route: string) {
     });
   }
 
+  // Debug session endpoint
+  if (route === 'debug/session') {
+    try {
+      const cookies = databaseSessionStore.parseCookies(req.headers.cookie);
+      const sessionToken = cookies.session;
+      
+      const debugInfo = {
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV || 'development',
+        host: req.headers.host,
+        protocol: req.headers['x-forwarded-proto'] || 'http',
+        hasCookieHeader: !!req.headers.cookie,
+        cookieHeader: req.headers.cookie ? req.headers.cookie.substring(0, 100) + '...' : null,
+        hasSessionToken: !!sessionToken,
+        sessionTokenLength: sessionToken ? sessionToken.length : 0,
+        hasDatabase: !!process.env.DATABASE_URL,
+      };
+
+      if (sessionToken) {
+        try {
+          const session = await databaseSessionStore.validateSession(sessionToken);
+          debugInfo.sessionValid = !!session;
+          if (session) {
+            debugInfo.sessionEmail = session.email;
+            debugInfo.sessionCreated = session.createdAt;
+            debugInfo.lastActivity = session.lastActivity;
+          }
+        } catch (error) {
+          debugInfo.sessionError = error.message;
+        }
+      }
+
+      return res.status(200).json(debugInfo);
+    } catch (error) {
+      return res.status(500).json({
+        error: 'Debug failed',
+        message: error.message,
+        timestamp: new Date().toISOString()
+      });
+    }
+  }
+
   return res.status(404).json({ error: 'Route not found', route });
 }

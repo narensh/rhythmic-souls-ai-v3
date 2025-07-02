@@ -12,7 +12,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           }
           if (req.method === 'GET') {
               const host = req.headers.host;
-              const protocol = req.headers['x-forwarded-proto'] || 'http';
+              const protocol = req.headers['x-forwarded-proto'] || 'https';
               const redirectUri = `${protocol}://${host}/api/auth/google`;
               const scope = 'openid email profile';
               const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}&response_type=code&access_type=offline&prompt=consent`;
@@ -68,7 +68,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                       await databaseSessionStore.setUser(userData.email, sessionData);
                       // Create and set session cookie
                       const sessionToken = await databaseSessionStore.createSession(userData.email);
-                      res.setHeader('Set-Cookie', `session=${sessionToken}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${7 * 24 * 60 * 60}`);
+                      const protocol = req.headers['x-forwarded-proto'] || 'https';
+                      const isSecure = protocol === 'https';
+                      const cookieOptions = [
+                        `session=${sessionToken}`,
+                        'HttpOnly',
+                        'Path=/',
+                        `Max-Age=${7 * 24 * 60 * 60}`,
+                        isSecure ? 'Secure' : '',
+                        'SameSite=Lax'
+                      ].filter(Boolean).join('; ');
+                      res.setHeader('Set-Cookie', cookieOptions);
                       return res.redirect('/');
                   }
                   catch (error) {

@@ -1,5 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { sessionStore } from '../../../lib/session-store.js';
+import { databaseSessionStore } from '../../../lib/database-session-store.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const clientId = process.env.GOOGLE_CLIENT_ID;
@@ -64,10 +64,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                           accessToken: tokens.access_token,
                           refreshToken: tokens.refresh_token,
                       };
-                      // Store user in session store
-                      sessionStore.setUser(userData.email, sessionData);
+                      // Store user in database session store
+                      await databaseSessionStore.setUser(userData.email, sessionData);
                       // Create and set session cookie
-                      const sessionToken = sessionStore.createSession(userData.email);
+                      const sessionToken = await databaseSessionStore.createSession(userData.email);
                       res.setHeader('Set-Cookie', `session=${sessionToken}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${7 * 24 * 60 * 60}`);
                       return res.redirect('/');
                   }

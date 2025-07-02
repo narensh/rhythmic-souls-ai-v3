@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { sessionStore } from '../lib/session-store.js';
+import { databaseSessionStore } from '../lib/database-session-store.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -112,7 +112,7 @@ async function handleAPIRoute(req: any, res: any, route: string) {
           const userResponse = await fetch(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${tokens.access_token}`);
           const userData = await userResponse.json();
 
-          sessionStore.setUser(userData.email, {
+          await databaseSessionStore.setUser(userData.email, {
             id: userData.id,
             email: userData.email,
             firstName: userData.given_name,
@@ -122,7 +122,7 @@ async function handleAPIRoute(req: any, res: any, route: string) {
             refreshToken: tokens.refresh_token,
           });
 
-          const sessionToken = sessionStore.createSession(userData.email);
+          const sessionToken = await databaseSessionStore.createSession(userData.email);
           res.setHeader('Set-Cookie', `session=${sessionToken}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${7 * 24 * 60 * 60}`);
           return res.redirect('/');
         } catch (error) {
@@ -142,19 +142,19 @@ async function handleAPIRoute(req: any, res: any, route: string) {
     }
 
     try {
-      const cookies = sessionStore.parseCookies(req.headers.cookie);
+      const cookies = databaseSessionStore.parseCookies(req.headers.cookie);
       const sessionToken = cookies.session;
 
       if (!sessionToken) {
         return res.status(401).json({ message: 'Unauthorized' });
       }
 
-      const session = sessionStore.validateSession(sessionToken);
+      const session = await databaseSessionStore.validateSession(sessionToken);
       if (!session) {
         return res.status(401).json({ message: 'Unauthorized' });
       }
 
-      const user = sessionStore.getUser(session.email);
+      const user = await databaseSessionStore.getUser(session.email);
       if (!user) {
         return res.status(401).json({ message: 'Unauthorized' });
       }
@@ -178,11 +178,11 @@ async function handleAPIRoute(req: any, res: any, route: string) {
       return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const cookies = sessionStore.parseCookies(req.headers.cookie);
+    const cookies = databaseSessionStore.parseCookies(req.headers.cookie);
     const sessionToken = cookies.session;
 
     if (sessionToken) {
-      sessionStore.deleteSession(sessionToken);
+      await databaseSessionStore.deleteSession(sessionToken);
     }
 
     res.setHeader('Set-Cookie', 'session=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax');

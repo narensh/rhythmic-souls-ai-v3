@@ -153,6 +153,8 @@ ISSUER_URL=https://replit.com/oidc
 - June 29, 2025: Fixed ES Module imports by adding .js extensions to all relative imports for Vercel production compatibility
 - June 30, 2025: Fixed path alias resolution by replacing @shared/ imports with relative paths (../shared/schema.js) for production compatibility
 - June 30, 2025: Created production-optimized server (server/production.ts) to bypass Vite dependencies in Vercel deployment
+- July 2, 2025: **CRITICAL FIX** - Replaced in-memory session store with PostgreSQL-backed session storage to resolve Vercel stateless function issues
+- July 2, 2025: Updated all API endpoints (google, user, logout) to use database session store for persistent authentication across serverless functions
 
 ## User Preferences
 

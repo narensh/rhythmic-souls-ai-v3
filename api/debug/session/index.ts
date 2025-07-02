@@ -1,5 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { databaseSessionStore } from '../../lib/database-session-store.js';
+import { databaseSessionStore } from '../../../lib/database-session-store.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {
@@ -22,7 +22,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       hasDatabase: !!process.env.DATABASE_URL,
       userAgent: req.headers['user-agent'],
       origin: req.headers.origin,
-      referer: req.headers.referer
+      referer: req.headers.referer,
+      sessionValid: false,
+      sessionEmail: "",
+      sessionCreated: new Date(),
+      lastActivity: new Date(),
+      sessionError: ""
     };
 
     if (sessionToken) {
@@ -35,7 +40,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           debugInfo.lastActivity = session.lastActivity;
         }
       } catch (error) {
-        debugInfo.sessionError = error.message;
+//         debugInfo.sessionError = error;
+        console.log("error: ", error);
       }
     }
 
@@ -43,7 +49,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (error) {
     return res.status(500).json({
       error: 'Debug failed',
-      message: error.message,
+      message: error,
       timestamp: new Date().toISOString()
     });
   }

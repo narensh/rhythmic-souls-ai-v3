@@ -21,18 +21,21 @@ export function Sidebar() {
   const { isCollapsed, toggleSidebar } = useSidebar();
 
   const handleServiceClick = (sectionId: string) => {
+    // Remove any # prefix from sectionId
+    const cleanSectionId = sectionId.replace(/^#/, '');
+    
     // First navigate to home page if not already there
     if (window.location.pathname !== '/') {
       window.location.href = '/';
       setTimeout(() => {
-        const element = document.getElementById(sectionId);
+        const element = document.getElementById(cleanSectionId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
     } else {
       // Already on home page, just scroll to section
-      const element = document.getElementById(sectionId);
+      const element = document.getElementById(cleanSectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
@@ -68,7 +71,7 @@ export function Sidebar() {
         )}
         <nav className="space-y-2">
           <button
-            onClick={() => handleServiceClick('#services')}
+            onClick={() => handleServiceClick('services')}
             className={`flex items-center ${isCollapsed ? 'justify-center' : 'space-x-3'} p-3 w-full rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group`}
             title={isCollapsed ? 'Our Services' : ''}
           >

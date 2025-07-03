@@ -2,10 +2,6 @@ import { Navigation } from "@/components/Layout/Navigation";
 import { HeroSection } from "@/components/Hero/HeroSection";
 import { ServicesGrid } from "@/components/Services/ServicesGrid";
 import { DemoVideo } from "@/components/Demo/DemoVideo";
-
-import { MusicTools } from "@/components/Music/MusicTools";
-import { NewsSection } from "@/components/News/NewsSection";
-import { TestimonialsSection } from "@/components/Testimonials/TestimonialsSection";
 import { NewsletterSection } from "@/components/Newsletter/NewsletterSection";
 import { Footer } from "@/components/Layout/Footer";
 import { Sidebar } from "@/components/Layout/Sidebar";
@@ -24,9 +20,6 @@ export default function Landing() {
           <HeroSection />
           <ServicesGrid />
           <DemoVideo />
-          <MusicTools />
-          <NewsSection />
-          <TestimonialsSection />
           <NewsletterSection />
         </main>
         <Footer />

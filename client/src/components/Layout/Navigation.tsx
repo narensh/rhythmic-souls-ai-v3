@@ -124,7 +124,7 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme}
-                className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors z-10"
               >
                 {theme === "dark" ? (
                   <Sun className="h-4 w-4" />
@@ -135,7 +135,7 @@ export function Navigation() {
 
               {/* User Menu */}
               {isAuthenticated ? (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 z-10">
                   <Avatar className="h-8 w-8">
                     <AvatarImage src={(user as any)?.profileImageUrl} />
                     <AvatarFallback className="bg-gradient-to-br from-purple-500 to-blue-500 text-white">
@@ -155,7 +155,7 @@ export function Navigation() {
               ) : (
                 <Button
                   onClick={() => setLocation("/auth")}
-                  className="bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:from-purple-600 hover:to-blue-600 transition-all"
+                  className="bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:from-purple-600 hover:to-blue-600 transition-all z-10"
                 >
                   <User className="h-4 w-4 mr-2" />
                   <span className="hidden sm:block">Sign In</span>

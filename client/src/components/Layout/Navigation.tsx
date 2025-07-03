@@ -46,28 +46,39 @@ export function Navigation() {
                 </Button>
               </div>
               */}
-              {/* Logo */}
+              {/* Logo and Title - Clickable */}
               <div className="pl-4"></div>
-              <Link href="/" className="flex items-center space-x-2">
-                <img
-                  src={logoImage}
-                  alt="Rhythmic Souls AI Logo"
-                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover"
+              <div className="relative">
+                <a 
+                  href="/" 
+                  className="absolute inset-0 z-10"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = '/';
+                  }}
+                  style={{ width: '100%', height: '100%' }}
                 />
-                <div className="hidden sm:block">
-                  <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
-                    Rhythmic Souls AI
-                  </h1>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    Intelligent Business Solutions
-                  </p>
+                <div className="flex items-center space-x-2 relative z-0">
+                  <img
+                    src={logoImage}
+                    alt="Rhythmic Souls AI Logo"
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover"
+                  />
+                  <div className="hidden sm:block">
+                    <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+                      Rhythmic Souls AI
+                    </h1>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      Intelligent Business Solutions
+                    </p>
+                  </div>
+                  <div className="block sm:hidden">
+                    <h1 className="text-sm font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+                      Rhythmic Souls
+                    </h1>
+                  </div>
                 </div>
-                <div className="block sm:hidden">
-                  <h1 className="text-sm font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
-                    Rhythmic Souls
-                  </h1>
-                </div>
-              </Link>
+              </div>
             </div>
 
             {/* Navigation Items */}

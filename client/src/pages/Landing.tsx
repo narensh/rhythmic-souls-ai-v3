@@ -19,20 +19,18 @@ export default function Landing() {
       <Navigation />
       <Sidebar />
 
-      <main
-        className={`pt-16 min-h-screen transition-all duration-300 ${isCollapsed ? "md:ml-16" : "md:ml-80"}`}
-      >
-        <HeroSection />
-        <ServicesGrid />
-        <InteractiveDemo />
-
-        <MusicTools />
-        <NewsSection />
-        <TestimonialsSection />
-        <NewsletterSection />
-      </main>
-
-      <Footer />
+      <div className={`pt-16 transition-all duration-300 ${isCollapsed ? "md:ml-16" : "md:ml-80"}`}>
+        <main className="min-h-[calc(100vh-4rem)]">
+          <HeroSection />
+          <ServicesGrid />
+          <InteractiveDemo />
+          <MusicTools />
+          <NewsSection />
+          <TestimonialsSection />
+          <NewsletterSection />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }

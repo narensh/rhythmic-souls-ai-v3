@@ -116,16 +116,40 @@ export function Footer() {
             © 2025 Rhythmic Souls Pvt Ltd. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-slate-400 hover:text-purple-400 transition-colors">
+            <a 
+              href="https://facebook.com/rhythmicsoulsai" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-purple-400 transition-colors"
+              aria-label="Facebook"
+            >
+              <i className="fab fa-facebook-f"></i>
+            </a>
+            <a 
+              href="https://twitter.com/rhythmicsoulsai" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-purple-400 transition-colors"
+              aria-label="Twitter"
+            >
               <i className="fab fa-twitter"></i>
             </a>
-            <a href="#" className="text-slate-400 hover:text-purple-400 transition-colors">
-              <i className="fab fa-linkedin"></i>
+            <a 
+              href="https://instagram.com/rhythmicsouls.ai" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-purple-400 transition-colors"
+              aria-label="Instagram"
+            >
+              <i className="fab fa-instagram"></i>
             </a>
-            <a href="#" className="text-slate-400 hover:text-purple-400 transition-colors">
-              <i className="fab fa-github"></i>
-            </a>
-            <a href="#" className="text-slate-400 hover:text-purple-400 transition-colors">
+            <a 
+              href="https://youtube.com/@rhythmicsoulsai"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-purple-400 transition-colors"
+              aria-label="YouTube"
+            >
               <i className="fab fa-youtube"></i>
             </a>
           </div>

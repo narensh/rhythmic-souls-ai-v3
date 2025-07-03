@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Navigation />
-      <Sidebar />
       
       <main className={`pt-16 min-h-screen transition-all duration-300 ${isCollapsed ? 'md:ml-0' : 'md:ml-80'}`}>
         <HeroSection />

@@ -23,7 +23,7 @@ export function Navigation() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               {/* Single Hamburger Menu Button */}
-              <div className="pl-4">
+              {/*<div className="pl-4">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -45,8 +45,9 @@ export function Navigation() {
                   )}
                 </Button>
               </div>
-
+              */}
               {/* Logo */}
+              <div className="pl-4"></div>
               <Link href="/" className="flex items-center space-x-2">
                 <img
                   src={logoImage}

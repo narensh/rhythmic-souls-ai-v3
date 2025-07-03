@@ -19,13 +19,13 @@ export function HeroSection() {
               Build, deploy, and scale intelligent systems that drive real business value.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full max-w-lg">
-              <Button 
+              {/* <Button
                 size="lg"
                 className="flex-1 sm:flex-none px-6 py-3 bg-white text-purple-600 font-semibold hover:bg-purple-50 transition-colors text-center"
                 onClick={() => window.location.href = '/api/login'}
               >
                 Start Free Trial
-              </Button>
+              </Button> */}
               <Button 
                 size="lg"
                 variant="secondary"

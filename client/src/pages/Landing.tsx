@@ -1,7 +1,7 @@
 import { Navigation } from "@/components/Layout/Navigation";
 import { HeroSection } from "@/components/Hero/HeroSection";
 import { ServicesGrid } from "@/components/Services/ServicesGrid";
-import { InteractiveDemo } from "@/components/Demo/InteractiveDemo";
+import { DemoVideo } from "@/components/Demo/DemoVideo";
 
 import { MusicTools } from "@/components/Music/MusicTools";
 import { NewsSection } from "@/components/News/NewsSection";
@@ -23,7 +23,7 @@ export default function Landing() {
         <main className="min-h-[calc(100vh-4rem)]">
           <HeroSection />
           <ServicesGrid />
-          <InteractiveDemo />
+          <DemoVideo />
           <MusicTools />
           <NewsSection />
           <TestimonialsSection />

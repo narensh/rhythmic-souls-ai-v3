@@ -1,7 +1,7 @@
 import { Navigation } from '@/components/Layout/Navigation';
 import { HeroSection } from '@/components/Hero/HeroSection';
 import { ServicesGrid } from '@/components/Services/ServicesGrid';
-import { InteractiveDemo } from '@/components/Demo/InteractiveDemo';
+import { DemoVideo } from '@/components/Demo/DemoVideo';
 
 import { MusicTools } from '@/components/Music/MusicTools';
 import { UserDashboard } from '@/components/Dashboard/UserDashboard';
@@ -27,7 +27,7 @@ export default function Home() {
           <ServicesGrid />
         </div>
         <div id="content-creation">
-          <InteractiveDemo />
+          <DemoVideo />
         </div>
 
         <div id="music-tools">

@@ -15,7 +15,6 @@ export default function Home() {
       
       <main className={`pt-16 min-h-screen transition-all duration-300 ${isCollapsed ? 'md:ml-0' : 'md:ml-80'}`}>
         <HeroSection />
-        <UserDashboard />
         <div id="services">
           <ServicesGrid />
         </div>

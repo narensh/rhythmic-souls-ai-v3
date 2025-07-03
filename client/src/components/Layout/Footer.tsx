@@ -1,5 +1,6 @@
 import { Link } from 'wouter';
 import { Mail, Phone, Globe } from 'lucide-react';
+import logoImage from "@assets/logo-design_1751134726547.jpg";
 
 const services = [
   'Conversational AI',
@@ -37,7 +38,7 @@ export function Footer() {
           <div>
             <div className="flex items-center space-x-3 mb-6">
               <img 
-                src="/logo.jpg" 
+                src={logoImage}
                 alt="Rhythmic Souls AI Logo" 
                 className="w-10 h-10 rounded-full object-cover"
               />

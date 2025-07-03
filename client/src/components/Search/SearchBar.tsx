@@ -136,7 +136,7 @@ export function SearchBar() {
             placeholder="Search site content..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full sm:w-64 pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 rounded-lg"
+            className="w-full min-w-[12rem] max-w-md pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 rounded-lg text-base"
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
           {isSearching && (

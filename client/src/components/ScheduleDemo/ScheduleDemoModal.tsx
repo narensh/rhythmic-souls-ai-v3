@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 export function ScheduleDemoCTA() {
   const handleClick = () => {
     // Open the booking page in a new tab
-    window.open('https://cal.com/seekernaren/30min', '_blank', 'noopener,noreferrer');
+    window.open('https://cal.com/contact-rsai/inception', '_blank', 'noopener,noreferrer');
   };
 
   return (

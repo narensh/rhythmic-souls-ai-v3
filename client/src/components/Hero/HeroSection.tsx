@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Bot } from 'lucide-react';
+import { ScheduleDemoCTA } from '@/components/ScheduleDemo/ScheduleDemoModal';
 
 export function HeroSection() {
   return (
@@ -40,6 +41,7 @@ export function HeroSection() {
               >
                 Schedule Demo
               </Button>
+              <ScheduleDemoCTA/>
             </div>
           </div>
           <div className="hidden lg:block">

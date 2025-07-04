@@ -27,20 +27,6 @@ export function HeroSection() {
               >
                 Start Free Trial
               </Button> */}
-              <Button 
-                size="lg"
-                variant="secondary"
-                className="flex-1 sm:flex-none px-6 py-3 font-semibold transition-colors text-center bg-white text-purple-600 border-2 border-white hover:bg-purple-50 hover:border-purple-200"
-                onClick={() => {
-                  // Scroll to contact section or open contact modal
-                  const contactElement = document.querySelector('#contact') || document.querySelector('footer');
-                  if (contactElement) {
-                    contactElement.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                Schedule Demo
-              </Button>
               <ScheduleDemoCTA/>
             </div>
           </div>

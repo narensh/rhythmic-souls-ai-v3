@@ -71,7 +71,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               console.log("User data set in session store:", userData);
               // Create and set session cookie
               const cookies = databaseSessionStore.parseCookies(req.headers.cookie);
-              var sessionToken = cookies.session.toString();
+              var sessionToken = cookies.session;
               sessionToken = await databaseSessionStore.createSession(userData.email, sessionToken);
               console.log("creating session in db for user", userData.email, "session token:", sessionToken);
               const protocol = req.headers['x-forwarded-proto'] || 'https';
